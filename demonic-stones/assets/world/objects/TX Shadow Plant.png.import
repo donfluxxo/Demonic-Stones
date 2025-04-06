@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chpms84i8h6ik"
-path="res://.godot/imported/TX Tileset Grass.png-9f260f5808779640ee5cf2f910d85190.ctex"
+uid="uid://dyglqjixbv84c"
+path="res://.godot/imported/TX Shadow Plant.png-68fbb8db2bfbef335d926a0d28898e58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/environment/TX Tileset Grass.png"
-dest_files=["res://.godot/imported/TX Tileset Grass.png-9f260f5808779640ee5cf2f910d85190.ctex"]
+source_file="res://assets/world/objects/TX Shadow Plant.png"
+dest_files=["res://.godot/imported/TX Shadow Plant.png-68fbb8db2bfbef335d926a0d28898e58.ctex"]
 
 [params]
 

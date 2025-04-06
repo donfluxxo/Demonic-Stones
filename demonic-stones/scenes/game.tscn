@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyngn62q5561i"]
+
+[ext_resource type="PackedScene" uid="uid://cfkgaxft3r4b2" path="res://scenes/entities/player/player.tscn" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://nyhky8fld4jd" path="res://scenes/entities/player/player_stats.gd" id="2_iywne"]
+[ext_resource type="Script" uid="uid://jochaiw1cwmv" path="res://scenes/entities/player/player_actions.gd" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
+
+[sub_resource type="Resource" id="Resource_qh453"]
+script = ExtResource("2_iywne")
+move_speed = 100.0
+health = 100.0
+metadata/_custom_type_script = "uid://nyhky8fld4jd"
+
+[sub_resource type="Resource" id="Resource_gb22c"]
+script = ExtResource("3_p57ef")
+move_left = &"move_left"
+move_right = &"move_right"
+move_up = &"move_up"
+move_down = &"move_down"
+attack = &"attack"
+hit = &"hit"
+death = &"death"
+metadata/_custom_type_script = "uid://jochaiw1cwmv"
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
+z_index = 2
+stats = SubResource("Resource_qh453")
+player_actions = SubResource("Resource_gb22c")
+
+[node name="World" parent="." instance=ExtResource("4_u5sy4")]

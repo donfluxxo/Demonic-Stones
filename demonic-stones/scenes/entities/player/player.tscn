@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cfkgaxft3r4b2"]
+[gd_scene load_steps=76 format=3 uid="uid://cfkgaxft3r4b2"]
 
 [ext_resource type="Script" uid="uid://c58u3hwud7eqi" path="res://scenes/entities/player/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://brt48p83lygb5" path="res://assets/characters/NightBorne/NightBorne.png" id="1_ucweq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://chlamwkxusfu2" path="res://scenes/entities/player/move_state.gd" id="5_bj7e2"]
 [ext_resource type="Script" uid="uid://cuuu8igjgdktb" path="res://scenes/entities/player/player_input.gd" id="7_bj7e2"]
 [ext_resource type="Script" uid="uid://jochaiw1cwmv" path="res://scenes/entities/player/player_actions.gd" id="8_1murt"]
+[ext_resource type="Script" uid="uid://d1732xl2lvrpw" path="res://scenes/entities/player/attack_state.gd" id="8_ovg4i"]
 
 [sub_resource type="Resource" id="Resource_ovg4i"]
 script = ExtResource("2_5sj0x")
@@ -286,7 +287,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ogpgs")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack",
 "speed": 11.0
 }, {
@@ -442,6 +443,10 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42nxq"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wli1"]
+radius = 6.27063
+height = 36.0073
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_1murt"]
 var/direction/name = &"direction"
 var/direction/type = 5
@@ -460,36 +465,173 @@ hit = &"hit"
 death = &"death"
 metadata/_custom_type_script = "uid://jochaiw1cwmv"
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="Animation" id="Animation_xy2vv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -9.8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sword/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.29336]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword/CollisionShape2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.621, 0.501)]
+}
+
+[sub_resource type="Animation" id="Animation_j0oqr"]
+resource_name = "attack"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.2, 0.233333, 0.300011, 0.400019, 0.5, 0.600627),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.232797, 0.299059, 0.4, 0.500091, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-13, -9), Vector2(-4, -31), Vector2(4, -42), Vector2(13, -21), Vector2(4, -4), Vector2(-13, -9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/CollisionShape2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.232797, 0.3, 0.4, 0.500091, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.862193, -0.479966, -1.4556, -0.113446, -1.57778, 0.862193]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sword/CollisionShape2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.232179, 0.299059, 0.399877, 0.500089, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-0.725848, 0.555849), Vector2(-1.111, 1.221), Vector2(-1.901, 1.736), Vector2(-4.881, 2.236), Vector2(-1.871, 2.151), Vector2(-0.725848, 0.555849)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.699287),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r4dfn"]
+_data = {
+&"Attack": SubResource("Animation_j0oqr"),
+&"RESET": SubResource("Animation_xy2vv")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite")]
 script = ExtResource("1_08t41")
 stats = SubResource("Resource_ovg4i")
 player_actions = SubResource("Resource_7wli1")
-sprite = NodePath("AnimatedSprite2D")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("PlayerAnimation")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -22.5)
 sprite_frames = SubResource("SpriteFrames_kvgni")
-animation = &"Idle"
+animation = &"Attack"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.3)
 shape = SubResource("CircleShape2D_42nxq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -22.5)
-texture = ExtResource("1_ucweq")
-hframes = 23
-vframes = 10
-frame = 23
+[node name="Sword" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+position = Vector2(-16, -9.8)
+rotation = -2.29336
+scale = Vector2(-0.621, 0.501)
+shape = SubResource("CapsuleShape2D_7wli1")
+disabled = true
 
 [node name="LimboHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("character", "states")]
 blackboard_plan = SubResource("BlackboardPlan_1murt")
 script = ExtResource("3_bjvvg")
 character = NodePath("..")
 states = {
+"Attack": NodePath("AttackState"),
 "Idle": NodePath("IdleState"),
 "Move": NodePath("MoveState")
 }
@@ -497,19 +639,26 @@ states = {
 [node name="IdleState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_1ie0h")
 animation_name = "Idle"
-sprite = NodePath("../../AnimatedSprite2D")
+sprite = NodePath("../../PlayerAnimation")
 
 [node name="MoveState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite")]
 script = ExtResource("5_bj7e2")
 animation_name = "Move"
-sprite = NodePath("../../AnimatedSprite2D")
+sprite = NodePath("../../PlayerAnimation")
+metadata/_custom_type_script = "uid://dcuocv8giyanq"
+
+[node name="AttackState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_ovg4i")
+attack = &"Attack"
+animation_name = "Attack"
+sprite = NodePath("../../PlayerAnimation")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("limbo_hsm")]
-offset_left = -15.0
-offset_top = -53.0
-offset_right = 25.0
-offset_bottom = -30.0
+offset_left = -59.0
+offset_top = -55.0
+offset_right = -19.0
+offset_bottom = -32.0
 script = ExtResource("5_8akj5")
 limbo_hsm = NodePath("../LimboHSM")
 
@@ -517,3 +666,10 @@ limbo_hsm = NodePath("../LimboHSM")
 script = ExtResource("7_bj7e2")
 player_actions = SubResource("Resource_5sj0x")
 limbo_hsm = NodePath("../LimboHSM")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r4dfn")
+}

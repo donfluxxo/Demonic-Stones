@@ -20,7 +20,6 @@ func move() -> Vector2:
 		update_velocity(direction)
 		#Move
 		character.move_and_slide()
-		prints(character.velocity)
 	else:
 		update_velocity(direction)
 	
@@ -29,6 +28,7 @@ func move() -> Vector2:
 func update_velocity(input: Vector2) -> void:
 	#Update velocity based on user input
 	character.velocity = input.normalized() * character_stats.move_speed
+	
 	if character.velocity.x < 0:
 			sprite.flip_h = true
 	if character.velocity.x > 0:

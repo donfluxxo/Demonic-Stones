@@ -6,13 +6,22 @@ extends Node
 
 var blackboard : Blackboard
 var input_direction : Vector2
-
+var is_attacking : bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Initiate blackboard
 	blackboard = limbo_hsm.blackboard
+	#Bind the input direction to the corresponding blackboard var
 	blackboard.bind_var_to_property(BBNames.direction_var, self ,"input_direction", true)
-
+	#Bing the attack input to the corresponding blackboard var
+	blackboard.bind_var_to_property(BBNames.wants_to_attack, self, "is_attacking",true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#Getting the input direction from Player
 	input_direction = Input.get_vector(player_actions.move_left, player_actions.move_right, player_actions.move_up, player_actions.move_down)
+	#Checking if Player wants to attack
+	if(Input.is_action_pressed("attack")):
+		is_attacking = true
+	if(Input.is_action_just_released("attack")):
+		is_attacking = false

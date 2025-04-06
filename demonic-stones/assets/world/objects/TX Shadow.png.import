@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e04dpjyc7ugj"
-path="res://.godot/imported/TX Struct.png-d342657efeecac3e36bd019ac3988d76.ctex"
+uid="uid://4db5xthp35gy"
+path="res://.godot/imported/TX Shadow.png-b06994cdba6f20dba9e7d08fba027094.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/environment/TX Struct.png"
-dest_files=["res://.godot/imported/TX Struct.png-d342657efeecac3e36bd019ac3988d76.ctex"]
+source_file="res://assets/world/objects/TX Shadow.png"
+dest_files=["res://.godot/imported/TX Shadow.png-b06994cdba6f20dba9e7d08fba027094.ctex"]
 
 [params]
 
