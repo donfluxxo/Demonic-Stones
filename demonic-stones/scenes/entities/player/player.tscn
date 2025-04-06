@@ -496,13 +496,13 @@ states = {
 
 [node name="IdleState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_1ie0h")
-sprite = NodePath("../../AnimatedSprite2D")
 animation_name = "Idle"
+sprite = NodePath("../../AnimatedSprite2D")
 
 [node name="MoveState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite")]
 script = ExtResource("5_bj7e2")
-sprite = NodePath("../../AnimatedSprite2D")
 animation_name = "Move"
+sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("limbo_hsm")]
