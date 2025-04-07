@@ -1060,14 +1060,14 @@ states = {
 script = ExtResource("3_1ie0h")
 animation_name = "Idle"
 sprite = NodePath("../../PlayerAnimation")
-attack_timer = NodePath("../AttackState/AttackCooldown")
+attack_timer = NodePath("../AttackState/AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="MoveState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player")]
 script = ExtResource("5_bj7e2")
 animation_name = "Move"
 sprite = NodePath("../../PlayerAnimation")
-attack_timer = NodePath("../AttackState/AttackCooldown")
+attack_timer = NodePath("../AttackState/AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
@@ -1075,11 +1075,11 @@ metadata/_custom_type_script = "uid://dcuocv8giyanq"
 script = ExtResource("8_ovg4i")
 animation_name = "Attack"
 sprite = NodePath("../../PlayerAnimation")
-attack_timer = NodePath("AttackCooldown")
+attack_timer = NodePath("AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
-[node name="AttackCooldown" type="Timer" parent="LimboHSM/AttackState"]
+[node name="AttackTimer" type="Timer" parent="LimboHSM/AttackState"]
 wait_time = 0.7
 one_shot = true
 
@@ -1106,4 +1106,4 @@ libraries = {
 }
 
 [connection signal="body_entered" from="Sword" to="LimboHSM/AttackState" method="_on_sword_body_entered"]
-[connection signal="timeout" from="LimboHSM/AttackState/AttackCooldown" to="LimboHSM/AttackState" method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="LimboHSM/AttackState/AttackTimer" to="LimboHSM/AttackState" method="_on_attack_timer_timeout"]

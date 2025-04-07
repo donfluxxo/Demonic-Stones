@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://cldtkf2ya51vr"]
+
+[ext_resource type="Texture2D" uid="uid://bu12swtrmt5ol" path="res://assets/world/objects/TX Props.png" id="1_exsdh"]
+[ext_resource type="Texture2D" uid="uid://dtkx7ugfw3v6o" path="res://assets/world/objects/SpriteSheet.png" id="2_it42s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b47aq"]
+atlas = ExtResource("2_it42s")
+region = Rect2(0, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sgs8"]
+atlas = ExtResource("2_it42s")
+region = Rect2(25, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q624m"]
+atlas = ExtResource("2_it42s")
+region = Rect2(50, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nndn7"]
+atlas = ExtResource("2_it42s")
+region = Rect2(75, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgjxc"]
+atlas = ExtResource("2_it42s")
+region = Rect2(100, 0, 25, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_da7w6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b47aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sgs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q624m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nndn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgjxc")
+}],
+"loop": true,
+"name": &"aura",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1fdf"]
+
+[node name="Demonic Stone" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -29)
+texture = ExtResource("1_exsdh")
+region_enabled = true
+region_rect = Rect2(224, 0, 32, 64)
+
+[node name="EnergyParticles" type="AnimatedSprite2D" parent="Sprite2D"]
+modulate = Color(0, 1, 0.427451, 1)
+position = Vector2(0, 13.12)
+scale = Vector2(1.445, 1.445)
+sprite_frames = SubResource("SpriteFrames_da7w6")
+animation = &"aura"
+frame_progress = 0.370171
+
+[node name="GlowingSymbols" type="Sprite2D" parent="Sprite2D"]
+visible = false
+texture = ExtResource("1_exsdh")
+region_enabled = true
+region_rect = Rect2(256, 0, 32, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8.24)
+scale = Vector2(1.645, 1.22)
+shape = SubResource("CircleShape2D_g1fdf")
