@@ -17,7 +17,7 @@ func _enter() -> void:
 
 
 func attack() -> bool:
-	attacking = blackboard.get_var(BBNames.wants_to_attack)
+	attacking = blackboard.get_var(BBNames.attack_var)
 	
 	if attacking and move_allowed:
 		return attacking

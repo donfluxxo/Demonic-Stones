@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5y3mktx4vp21"]
+
+[ext_resource type="Texture2D" uid="uid://bu12swtrmt5ol" path="res://assets/world/objects/TX Props.png" id="1_bas4e"]
+[ext_resource type="Script" uid="uid://cfw1r2oxeb0yl" path="res://scenes/objects/chest_control.gd" id="2_opa1x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opa1x"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(96, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acra8"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pev8c"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj372"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(96, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bas4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opa1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acra8")
+}],
+"loop": false,
+"name": &"chest_closes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pev8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj372")
+}],
+"loop": false,
+"name": &"chest_opens",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_opa1x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_acra8"]
+
+[node name="Chest" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -28.945)
+sprite_frames = SubResource("SpriteFrames_bas4e")
+animation = &"chest_opens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.915)
+rotation = 1.5708
+scale = Vector2(0.6, 1)
+shape = SubResource("CapsuleShape2D_opa1x")
+debug_color = Color(0.997529, 0, 0.163915, 0.42)
+
+[node name="OpeningArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpeningArea" node_paths=PackedStringArray("sprite")]
+position = Vector2(0, -6.8)
+rotation = 1.5708
+scale = Vector2(1.49, 1.88)
+shape = SubResource("CapsuleShape2D_acra8")
+debug_color = Color(0, 0.64623, 0.242035, 0.42)
+script = ExtResource("2_opa1x")
+sprite = NodePath("../../AnimatedSprite2D")
+
+[connection signal="body_entered" from="OpeningArea" to="OpeningArea/CollisionShape2D" method="_on_collection_area_body_entered"]
+[connection signal="body_exited" from="OpeningArea" to="OpeningArea/CollisionShape2D" method="_on_collection_area_body_exited"]

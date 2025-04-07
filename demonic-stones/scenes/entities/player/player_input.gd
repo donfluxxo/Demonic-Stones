@@ -6,7 +6,7 @@ extends Node
 
 var blackboard : Blackboard
 var input_direction : Vector2
-var is_attacking : bool
+var attacking : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 	#Bind the input direction to the corresponding blackboard var
 	blackboard.bind_var_to_property(BBNames.direction_var, self ,"input_direction", true)
 	#Bing the attack input to the corresponding blackboard var
-	blackboard.bind_var_to_property(BBNames.wants_to_attack, self, "is_attacking",true)
+	blackboard.bind_var_to_property(BBNames.attack_var, self, "attacking",true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	#Checking if Player wants to attack
 	if(Input.is_action_just_pressed(player_actions.attack)):
 		prints("ATTACKING")
-		is_attacking = true
+		attacking = true
 	if(Input.is_action_just_released(player_actions.attack)):
-		is_attacking = false
+		attacking = false
 		prints("STOPPED ATTACKING")
