@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Demonic Stones"
+run/main_scene="uid://dyngn62q5561i"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

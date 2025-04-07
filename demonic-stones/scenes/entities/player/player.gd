@@ -1,9 +1,8 @@
-extends CharacterBody2D
+extends Character
 
-@export var stats : PlayerStats
+
 @export var player_actions : PlayerActions
-@export var animation_player : AnimationPlayer
-@export var sprite : AnimatedSprite2D
+
 
 func _ready():
 	pass

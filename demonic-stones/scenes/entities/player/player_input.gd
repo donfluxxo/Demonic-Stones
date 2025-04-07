@@ -7,6 +7,7 @@ extends Node
 var blackboard : Blackboard
 var input_direction : Vector2
 var is_attacking : bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Initiate blackboard
@@ -21,7 +22,9 @@ func _process(delta: float) -> void:
 	#Getting the input direction from Player
 	input_direction = Input.get_vector(player_actions.move_left, player_actions.move_right, player_actions.move_up, player_actions.move_down)
 	#Checking if Player wants to attack
-	if(Input.is_action_pressed("attack")):
+	if(Input.is_action_just_pressed(player_actions.attack)):
+		prints("ATTACKING")
 		is_attacking = true
-	if(Input.is_action_just_released("attack")):
+	if(Input.is_action_just_released(player_actions.attack)):
 		is_attacking = false
+		prints("STOPPED ATTACKING")
