@@ -1,6 +1,7 @@
 extends Label
 #For debugging the state machine
 
+
 @export var limbo_hsm : LimboHSM :
 	set(value):
 		if limbo_hsm != null:

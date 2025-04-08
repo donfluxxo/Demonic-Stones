@@ -1019,8 +1019,6 @@ animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("PlayerAnimation")
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
-z_index = 1
-y_sort_enabled = true
 position = Vector2(0, -22.5)
 sprite_frames = SubResource("SpriteFrames_kvgni")
 animation = &"Attack"

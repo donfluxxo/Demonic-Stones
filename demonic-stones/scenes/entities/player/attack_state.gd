@@ -1,5 +1,6 @@
 extends CharacterState
 
+
 #On entering this state
 func _enter() -> void:
 	#Start the attack cooldown and forbid any moves for that time
@@ -7,6 +8,7 @@ func _enter() -> void:
 	attack_finished = false
 	#Play the attack animation
 	attack_animation()
+
 
 #Function for calling the attack animation
 func attack_animation():
@@ -37,16 +39,20 @@ func _update(delta: float) -> void:
 			turn_off_animation_player(character.animation_player)
 			dispatch("moving",velocity)
 
+
 #Function for reseting and turning off the swords hitbox and its animation
 func turn_off_animation_player(animation_player : AnimationPlayer):
 	animation_player.current_animation = "RESET"
 	character.animation_player.active = false
 
+
 #Allow changing the state if attack is finished
 func _on_attack_timer_timeout() -> void:
 	attack_finished = true
 
-#Detect what the sword hit
+
+#Detect what the sword hit and handle the collision
 func _on_sword_body_entered(body: Node2D) -> void:
 	if(body.is_class("Chest")):
+		#Debug
 		prints("HIT")

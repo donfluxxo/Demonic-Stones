@@ -49,11 +49,14 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_acra8"]
 
 [node name="Chest" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -28.945)
 sprite_frames = SubResource("SpriteFrames_bas4e")
-animation = &"chest_opens"
+animation = &"chest_closes"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.915)

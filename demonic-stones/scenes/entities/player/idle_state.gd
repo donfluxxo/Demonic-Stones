@@ -1,5 +1,6 @@
 extends CharacterState
 
+
 #Called upon any update of this state
 func _update(delta: float) -> void:
 	if attack_finished:

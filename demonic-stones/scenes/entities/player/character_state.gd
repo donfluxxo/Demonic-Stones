@@ -1,6 +1,7 @@
 class_name CharacterState
 extends LimboState
 
+
 @export var animation_name : String
 @export var sprite : AnimatedSprite2D
 @export var attack_timer : Timer
@@ -10,11 +11,13 @@ extends LimboState
 var character : Character
 var attacking : bool
 
+
 #Called when entering a state
 func _enter() -> void:
 	#Get a reference to the Character node and play the sprite corresponding to the endered state
 	character = agent as Character
 	character.sprite.play(animation_name)
+
 
 #Attack function
 func attack() -> bool:
@@ -26,6 +29,7 @@ func attack() -> bool:
 		return attacking
 	
 	return false
+
 
 #Move function
 func move() -> Vector2:
@@ -42,6 +46,7 @@ func move() -> Vector2:
 		update_velocity(direction)
 	
 	return character.velocity
+
 
 #Function for updating the characters velocity stat
 func update_velocity(input: Vector2) -> void:

@@ -7,9 +7,9 @@
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
-
 [node name="World" parent="." instance=ExtResource("4_u5sy4")]
 
 [node name="Chest" parent="World" instance=ExtResource("3_lnu2h")]
 position = Vector2(-96, 54)
+
+[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
