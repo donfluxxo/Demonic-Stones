@@ -1,6 +1,6 @@
 class_name PlayerActions
 extends Resource
-# Variables for handling the player input
+## Variables for handling the player input
 
 
 @export var move_left: StringName = "move_left"

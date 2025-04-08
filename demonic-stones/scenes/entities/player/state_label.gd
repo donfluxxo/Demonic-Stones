@@ -1,5 +1,5 @@
 extends Label
-#For debugging the state machine
+## For debugging the state machine
 
 
 @export var limbo_hsm : LimboHSM :
@@ -17,5 +17,5 @@ extends Label
 			
 			limbo_hsm.active_state_changed.connect(_on_active_state_changed)
 
-func _on_active_state_changed(current: LimboState, _previous: LimboState):
+func _on_active_state_changed(current: LimboState, _previous: LimboState) -> void:
 	text = current.name

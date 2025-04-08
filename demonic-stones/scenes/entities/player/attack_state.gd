@@ -1,4 +1,5 @@
 extends CharacterState
+## AttackState
 
 
 # On entering this state
@@ -8,17 +9,6 @@ func _enter() -> void:
 	attack_finished = false
 	# Play the attack animation
 	attack_animation()
-
-
-# Function for calling the attack animation
-func attack_animation():
-	# Get acces to the Character node
-	character = agent as Character
-	# Play the attack animation for the sprite
-	character.sprite.play(animation_name)
-	# Activate and play the animation player for the swords hitbox
-	character.animation_player.active = true
-	character.animation_player.play(animation_name)
 
 
 # Called upon any update of this state
@@ -40,8 +30,19 @@ func _update(delta: float) -> void:
 			dispatch("moving",velocity)
 
 
+# Function for calling the attack animation
+func attack_animation() -> void:
+	# Get acces to the Character node
+	character = agent as Character
+	# Play the attack animation for the sprite
+	character.sprite.play(animation_name)
+	# Activate and play the animation player for the swords hitbox
+	character.animation_player.active = true
+	character.animation_player.play(animation_name)
+
+
 # Function for reseting and turning off the swords hitbox and its animation
-func turn_off_animation_player(animation_player : AnimationPlayer):
+func turn_off_animation_player(animation_player : AnimationPlayer) -> void:
 	animation_player.current_animation = "RESET"
 	character.animation_player.active = false
 

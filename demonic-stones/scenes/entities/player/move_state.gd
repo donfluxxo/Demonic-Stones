@@ -1,4 +1,5 @@
 extends CharacterState
+## Move state
 
 
 # Called upon any update of this state

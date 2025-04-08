@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 # Adding transitions betweens the states
-func _binding_setup():
+func _binding_setup() -> void:
 	add_transition(states["Idle"], states["Move"], "moving")
 	add_transition(states["Move"], states["Idle"], "stopped")
 	add_transition(states["Move"], states["Attack"], "attacking")

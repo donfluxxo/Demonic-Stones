@@ -1,5 +1,6 @@
 class_name CharacterState
 extends LimboState
+## Base class for the state machine states
 
 
 @export var animation_name : String
@@ -9,7 +10,6 @@ extends LimboState
 @export var attack_finished : bool = true
 
 var character : Character
-var attacking : bool
 
 
 # Called when entering a state
@@ -19,22 +19,10 @@ func _enter() -> void:
 	character.sprite.play(animation_name)
 
 
-# Attack function
-func attack() -> bool:
-	# Get the Attack input from the blackboard
-	attacking = blackboard.get_var(BBNames.attack_var)
-	
-	# Check if the character wants to attack and is not attacking already
-	if attacking and attack_finished:
-		return attacking
-	
-	return false
-
-
 # Move function
 func move() -> Vector2:
 	# Get the players input direction from the blackboard
-	var direction = blackboard.get_var(BBNames.direction_var)
+	var direction : Vector2 = blackboard.get_var(BBNames.direction_var)
 	
 	# Check if there was input
 	if direction:
@@ -59,3 +47,15 @@ func update_velocity(input: Vector2) -> void:
 			sprite.flip_h = true
 	if character.velocity.x > 0:
 			sprite.flip_h = false
+
+
+# Attack function
+func attack() -> bool:
+	# Get the Attack input from the blackboard
+	var attacking : bool = blackboard.get_var(BBNames.attack_var)
+	
+	# Check if the character wants to attack and is not attacking already
+	if attacking and attack_finished:
+		return attacking
+	
+	return false
