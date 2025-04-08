@@ -1,5 +1,5 @@
 class_name BBNames
-#Variables for the state machine blackboard
+# Variables for the state machine blackboard
 
 
 static var direction_var : StringName = "direction"

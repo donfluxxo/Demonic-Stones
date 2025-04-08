@@ -11,7 +11,7 @@ func _ready() -> void:
 	set_active(true)
 
 
-#Adding transitions betweens the states
+# Adding transitions betweens the states
 func _binding_setup():
 	add_transition(states["Idle"], states["Move"], "moving")
 	add_transition(states["Move"], states["Idle"], "stopped")
