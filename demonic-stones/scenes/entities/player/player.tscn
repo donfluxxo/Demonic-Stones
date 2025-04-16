@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://cfkgaxft3r4b2"]
+[gd_scene load_steps=134 format=3 uid="uid://cfkgaxft3r4b2"]
 
 [ext_resource type="Script" uid="uid://c58u3hwud7eqi" path="res://scenes/entities/player/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://brt48p83lygb5" path="res://assets/characters/NightBorne/NightBorne.png" id="1_ucweq"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dye1qmrgbwprp" path="res://scenes/entities/player/limbo_hsm.gd" id="3_bjvvg"]
 [ext_resource type="Script" uid="uid://bl0vnfn87a321" path="res://scenes/entities/player/state_label.gd" id="5_8akj5"]
 [ext_resource type="Script" uid="uid://chlamwkxusfu2" path="res://scenes/entities/player/move_state.gd" id="5_bj7e2"]
-[ext_resource type="Texture2D" uid="uid://iddqtosve6as" path="res://icon.svg" id="5_j0oqr"]
+[ext_resource type="Script" uid="uid://x2tmare47qmb" path="res://scenes/entities/player/sword.gd" id="5_j0oqr"]
 [ext_resource type="Script" uid="uid://cuuu8igjgdktb" path="res://scenes/entities/player/player_input.gd" id="7_bj7e2"]
 [ext_resource type="Script" uid="uid://jochaiw1cwmv" path="res://scenes/entities/player/player_actions.gd" id="8_1murt"]
 [ext_resource type="Script" uid="uid://d1732xl2lvrpw" path="res://scenes/entities/player/attack_state.gd" id="8_ovg4i"]
@@ -26,8 +26,8 @@ metadata/_custom_type_script = "uid://jochaiw1cwmv"
 
 [sub_resource type="Resource" id="Resource_ovg4i"]
 script = ExtResource("2_5sj0x")
-move_speed = 100.0
-health = 100.0
+move_speed = 150.0
+max_health = 100.0
 metadata/_custom_type_script = "uid://nyhky8fld4jd"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42nxq"]
@@ -444,6 +444,8 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42nxq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j0oqr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wli1"]
 radius = 6.27063
@@ -945,62 +947,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/CollisionShape2D/AttackCollision:position")
+tracks/5/path = NodePath("PlayerAnimation:sprite_frames")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-0.0981771, -0.0770988)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sword/CollisionShape2D/AttackCollision:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sword/CollisionShape2D/AttackCollision:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.114931, 0.268968)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("PlayerAnimation:sprite_frames")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [SubResource("SpriteFrames_txex0")]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Sword/CollisionShape2D/AttackCollision:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r4dfn"]
@@ -1009,9 +963,12 @@ _data = {
 &"RESET": SubResource("Animation_xy2vv")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite")]
-z_index = 1
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite") groups=["player"]]
+z_index = 2
 y_sort_enabled = true
+scale = Vector2(1.5, 1.5)
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_08t41")
 player_actions = SubResource("Resource_7wli1")
 stats = SubResource("Resource_ovg4i")
@@ -1024,25 +981,32 @@ sprite_frames = SubResource("SpriteFrames_kvgni")
 animation = &"Attack"
 autoplay = "Idle"
 
-[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+[node name="PlayerCollisionArea" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.4)
 shape = SubResource("CircleShape2D_42nxq")
 
-[node name="Sword" type="Area2D" parent="."]
+[node name="PlayerHurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtBox"]
+position = Vector2(0, -11)
+scale = Vector2(1, 0.8)
+shape = SubResource("CapsuleShape2D_j0oqr")
+
+[node name="Sword" type="Area2D" parent="." groups=["player", "weapons"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("5_j0oqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword" groups=["weapons"]]
 position = Vector2(-13, -9)
 rotation = 0.862193
 scale = Vector2(-0.725848, 0.555849)
 shape = SubResource("CapsuleShape2D_7wli1")
 disabled = true
 debug_color = Color(0.109337, 0.600041, 0.676224, 0.42)
-
-[node name="AttackCollision" type="Sprite2D" parent="Sword/CollisionShape2D"]
-visible = false
-position = Vector2(-3.8147e-06, 7.62939e-06)
-scale = Vector2(0.114931, 0.268968)
-texture = ExtResource("5_j0oqr")
 
 [node name="LimboHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("character", "states")]
 blackboard_plan = SubResource("BlackboardPlan_1murt")
@@ -1054,27 +1018,30 @@ states = {
 "Move": NodePath("MoveState")
 }
 
-[node name="IdleState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player")]
+[node name="IdleState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player", "sword")]
 script = ExtResource("3_1ie0h")
 animation_name = "Idle"
 sprite = NodePath("../../PlayerAnimation")
 attack_timer = NodePath("../AttackState/AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
+sword = NodePath("../../Sword")
 
-[node name="MoveState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player")]
+[node name="MoveState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player", "sword")]
 script = ExtResource("5_bj7e2")
 animation_name = "Move"
 sprite = NodePath("../../PlayerAnimation")
 attack_timer = NodePath("../AttackState/AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
+sword = NodePath("../../Sword")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
-[node name="AttackState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player")]
+[node name="AttackState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("sprite", "attack_timer", "animation_player", "sword")]
 script = ExtResource("8_ovg4i")
 animation_name = "Attack"
 sprite = NodePath("../../PlayerAnimation")
 attack_timer = NodePath("AttackTimer")
 animation_player = NodePath("../../AnimationPlayer")
+sword = NodePath("../../Sword")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
 [node name="AttackTimer" type="Timer" parent="LimboHSM/AttackState"]
@@ -1103,5 +1070,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_r4dfn")
 }
 
+[connection signal="area_entered" from="PlayerHurtBox" to="." method="_on_player_hurt_box_area_entered"]
 [connection signal="body_entered" from="Sword" to="LimboHSM/AttackState" method="_on_sword_body_entered"]
 [connection signal="timeout" from="LimboHSM/AttackState/AttackTimer" to="LimboHSM/AttackState" method="_on_attack_timer_timeout"]

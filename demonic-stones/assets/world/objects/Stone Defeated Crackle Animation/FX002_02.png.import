@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hq42enekk0so"
-path="res://.godot/imported/Skeleton Idle.png-afaec6e27c84206f4fa67076ffc3dc79.ctex"
+uid="uid://bytot36btx82o"
+path="res://.godot/imported/FX002_02.png-e40975dfd2f890fbbd0f9ce2f2ddc746.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Skeleton/Sprite Sheets/Skeleton Idle.png"
-dest_files=["res://.godot/imported/Skeleton Idle.png-afaec6e27c84206f4fa67076ffc3dc79.ctex"]
+source_file="res://assets/world/objects/Stone Defeated Crackle Animation/FX002_02.png"
+dest_files=["res://.godot/imported/FX002_02.png-e40975dfd2f890fbbd0f9ce2f2ddc746.ctex"]
 
 [params]
 

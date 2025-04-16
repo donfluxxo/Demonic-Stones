@@ -8,6 +8,7 @@ extends LimboState
 @export var attack_timer : Timer
 @export var animation_player : AnimationPlayer
 @export var attack_finished : bool = true
+@export var sword : Area2D
 
 var character : Character
 
@@ -42,11 +43,13 @@ func update_velocity(input: Vector2) -> void:
 	# Update velocity in the character stats based on user input
 	character.velocity = input.normalized() * character.stats.move_speed
 	
-	# Flip the sprite to the way the character is facing
+	# Flip the sprite to the way the character is facing and also the hitbox of the sword
 	if character.velocity.x < 0:
 			sprite.flip_h = true
+			sword.scale.x = -1.0
 	if character.velocity.x > 0:
 			sprite.flip_h = false
+			sword.scale.x = 1.0
 
 
 # Attack function

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deppde3xt4rn1"
-path="res://.godot/imported/Skeleton Hit.png-99c4be374bf1827e6a18d50ab0d14aac.ctex"
+uid="uid://cmb17i02atdaf"
+path="res://.godot/imported/FX002_05.png-89894df8a29ebf91e37a72bcc011932c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Skeleton/Sprite Sheets/Skeleton Hit.png"
-dest_files=["res://.godot/imported/Skeleton Hit.png-99c4be374bf1827e6a18d50ab0d14aac.ctex"]
+source_file="res://assets/world/objects/Stone Defeated Crackle Animation/FX002_05.png"
+dest_files=["res://.godot/imported/FX002_05.png-89894df8a29ebf91e37a72bcc011932c.ctex"]
 
 [params]
 

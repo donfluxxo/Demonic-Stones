@@ -55,5 +55,4 @@ func _on_attack_timer_timeout() -> void:
 # Detect what the sword hit and handle the collision
 func _on_sword_body_entered(body: Node2D) -> void:
 	if(body.is_class("Chest")):
-		# Debug
-		prints("HIT")
+		body.queue_free()

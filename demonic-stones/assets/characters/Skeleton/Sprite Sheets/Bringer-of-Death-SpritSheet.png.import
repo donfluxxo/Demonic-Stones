@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj7ghypnvgdr7"
-path="res://.godot/imported/Skeleton Walk.png-751084471c0b8e18b65191fd70bd39ac.ctex"
+uid="uid://gt1pngu6qe7h"
+path="res://.godot/imported/Bringer-of-Death-SpritSheet.png-b9b287c5b358e6e4ca49e49951fb2a61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Skeleton/Sprite Sheets/Skeleton Walk.png"
-dest_files=["res://.godot/imported/Skeleton Walk.png-751084471c0b8e18b65191fd70bd39ac.ctex"]
+source_file="res://assets/characters/Skeleton/Sprite Sheets/Bringer-of-Death-SpritSheet.png"
+dest_files=["res://.godot/imported/Bringer-of-Death-SpritSheet.png-b9b287c5b358e6e4ca49e49951fb2a61.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de2jn83krysjq"
-path="res://.godot/imported/Skeleton React.png-32cab37b32bce7b7c77fa5b17fe8cc07.ctex"
+uid="uid://oh5nix4ugye1"
+path="res://.godot/imported/FX002_08.png-5fc99c40f4e6147415c2172cc6af87fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Skeleton/Sprite Sheets/Skeleton React.png"
-dest_files=["res://.godot/imported/Skeleton React.png-32cab37b32bce7b7c77fa5b17fe8cc07.ctex"]
+source_file="res://assets/world/objects/Stone Defeated Crackle Animation/FX002_08.png"
+dest_files=["res://.godot/imported/FX002_08.png-5fc99c40f4e6147415c2172cc6af87fe.ctex"]
 
 [params]
 
