@@ -4,7 +4,6 @@ signal restarted_here
 signal restarted_home
 
 
-@onready var retry_screen : ColorRect = $CanvasLayer2/RetryScreen
 @onready var death_message1 : Label = $CanvasLayer2/DeathMessage
 @onready var death_message2 : Label = $CanvasLayer2/MobScore
 @onready var death_message3 : Label = $CanvasLayer2/StoneScore

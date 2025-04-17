@@ -62,6 +62,8 @@ position = Vector2(-141, -1)
 rotation = -1.14938
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="restarted_here" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_here"]
+[connection signal="restarted_home" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_home"]
 [connection signal="spawn_mob_triggered" from="Demonic Stone" to="." method="_on_spawn_mob_triggered"]
 [connection signal="stone_destroyed" from="Demonic Stone" to="." method="_on_stone_destroyed"]
 [connection signal="spawn_mob_triggered" from="Demonic Stone2" to="." method="_on_spawn_mob_triggered"]

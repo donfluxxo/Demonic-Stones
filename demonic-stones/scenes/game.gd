@@ -18,15 +18,8 @@ var player_kills : int
 @onready var restart_screen : Control = $Player/RestartScreen
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+	restart_screen.hide_restart_screen()
 
 func destroy_old_player_node() -> void:
 	var old_player = get_tree().get_first_node_in_group("player")
@@ -37,9 +30,10 @@ func create_new_player_node() -> void:
 	player = player_scene.instantiate()
 	add_child(player)
 	player.global_position = player_death_position
-	restart_screen =restart_scene.instantiate()
+	restart_screen = restart_scene.instantiate()
 	player.add_child(restart_screen)
 	player.player_died.connect(_on_player_player_died)
+	restart_screen.hide_restart_screen()
 	restart_screen.restarted_here.connect(_on_restart_screen_restarted_here)
 	restart_screen.restarted_home.connect(_on_restart_screen_restarted_home)
 	player.mobs_killed = player_kills

@@ -981,6 +981,7 @@ position = Vector2(0, -22.5)
 sprite_frames = SubResource("SpriteFrames_kvgni")
 animation = &"Attack"
 autoplay = "Idle"
+frame = 10
 
 [node name="PlayerCollisionArea" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.4)
@@ -1002,7 +1003,7 @@ collision_mask = 12
 script = ExtResource("5_j0oqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword" groups=["weapons"]]
-position = Vector2(-13, -9)
+position = Vector2(-2, -3)
 rotation = 0.862193
 scale = Vector2(-0.725848, 0.555849)
 shape = SubResource("CapsuleShape2D_7wli1")
