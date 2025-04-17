@@ -25,13 +25,13 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 - Procedural enemy spawning through demonic stone mechanics
 - Respawn system with "return to last death" or "return home" functionality
 - More to come (skills, loot, dungeon systems, etc.):
-- 
 
 ## 📦 Tech Stack
 
 - [Godot Engine 4.4+](https://godotengine.org/)
 - GDScript
 - A* Navigation, Behavior Trees, Signal-based systems, etc.
+
 
 ## 🚧 Current Status
 
@@ -60,6 +60,7 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 ## 📷 Screenshots
 
 (Coming soon)
+
 
 ## 👤 Author
 
