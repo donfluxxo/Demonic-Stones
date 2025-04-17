@@ -1,6 +1,6 @@
 # Demonic Stones
 
-![Banner](./banner.png)
+![Banner](./demonic-stones/banner.png)
 
 ## 🕹️ About
 
