@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=51 format=3 uid="uid://dp2ejborsw0j7"]
+[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://dp2ejborsw0j7"]
 
 [ext_resource type="Script" uid="uid://dh0oi5jscrj0" path="res://ai/tasks/choose_random_position.gd" id="1_2biup"]
 [ext_resource type="Script" uid="uid://c36rf4d4a3wif" path="res://ai/tasks/in_range.gd" id="1_23fir"]
@@ -109,7 +109,8 @@ property = &"action_allowed"
 value = SubResource("BBVariant_23fir")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_hwb1a"]
-max_duration = 1.5
+min_duration = 0.5
+max_duration = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_fk7ht"]
 custom_name = "Attack Player Sequence"
@@ -156,6 +157,10 @@ target_pos_var = &"pos"
 dir_var = &"dir"
 tolerance = 20
 
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_hwb1a"]
+time_limit = 2.0
+children = [SubResource("BTAction_23fir")]
+
 [sub_resource type="BTCondition" id="BTCondition_hwb1a"]
 script = ExtResource("1_23fir")
 distance_min = 0.0
@@ -170,7 +175,7 @@ children = [SubResource("BTCondition_hwb1a")]
 
 [sub_resource type="BTSequence" id="BTSequence_h6nl5"]
 custom_name = "Random Idle Movement Sequence"
-children = [SubResource("BTAction_6jxv7"), SubResource("BTAction_23fir"), SubResource("BTInvert_fk7ht"), SubResource("BTRandomWait_2biup")]
+children = [SubResource("BTAction_6jxv7"), SubResource("BTTimeLimit_hwb1a"), SubResource("BTInvert_fk7ht"), SubResource("BTRandomWait_2biup")]
 
 [sub_resource type="BTProbability" id="BTProbability_h1tfa"]
 run_chance = 0.3
