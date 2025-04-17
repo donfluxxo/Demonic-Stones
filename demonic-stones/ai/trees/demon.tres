@@ -50,8 +50,8 @@ children = [SubResource("BTSetAgentProperty_abjmx")]
 
 [sub_resource type="BTCondition" id="BTCondition_23fir"]
 script = ExtResource("1_23fir")
-distance_min = 10.0
-distance_max = 50.0
+distance_min = 0.0
+distance_max = 60.0
 target_var = &"target"
 target_alive_var = &"target_alive"
 
