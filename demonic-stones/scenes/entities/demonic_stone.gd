@@ -5,7 +5,7 @@ extends StaticBody2D
 @export var max_health : float = 500.0
 
 
-@onready var healthlabel : Label = $HealthLabel
+@onready var healthbar : ProgressBar = $HealthBar
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var glowing_symbols : Sprite2D = $Sprite2D/GlowingSymbols
 @onready var rng = RandomNumberGenerator.new()
@@ -17,12 +17,14 @@ var health : float
 var wave_counter : int = 0
 
 signal spawn_mob_wave
-
+signal stone_destroyed
 
 func _ready() -> void:
 	health = max_health
-	healthlabel.text = "%f" %health
+	healthbar.value = health
+	healthbar.max_value = max_health
 	stone_coords = self.position
+	$Sprite2D/EnergyParticles.modulate = Color(randf(),randf(),randf(), 1)
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
@@ -36,7 +38,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 func _manage_hit(object : Node2D) -> void:
 	health -= object.get_damage()
-	healthlabel.text = "%f" %health
+	healthbar.value = health
 	shake()
 	if health <= 0:
 		health = 0
@@ -79,7 +81,8 @@ func shake() -> void:
 
 
 func destroy_stone() -> void:
-	#Maybe give signal to drop loot here
+	
+	stone_destroyed.emit()
 	sprite.visible = false
 	$CrumbleAnimation.visible = true
 	$CrumbleAnimation.play()

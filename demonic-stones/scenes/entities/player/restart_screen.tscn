@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://diy6mniu6wiby"]
+
+[ext_resource type="Script" uid="uid://dk2lkk5kwhhv8" path="res://scenes/entities/player/restart_screen.gd" id="1_0mjaf"]
+[ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/demonic_stone.tscn" id="2_6iuxv"]
+
+[node name="RestartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0mjaf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="RetryScreen" type="ColorRect" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.662745)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 21
+
+[node name="RestartHereButton" type="Button" parent="CanvasLayer2"]
+z_index = 21
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = 90.0
+offset_right = 57.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart HERE."
+
+[node name="RestartHomeButton" type="Button" parent="CanvasLayer2"]
+z_index = 21
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = 60.0
+offset_right = 71.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart at spawn."
+
+[node name="DeathMessage" type="Label" parent="CanvasLayer2"]
+z_index = 21
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = 20.0
+offset_right = 0.5
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "YOU DIED !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MobScore" type="Label" parent="CanvasLayer2"]
+z_index = 21
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 70.0
+offset_right = 80.0
+offset_bottom = 23.0
+grow_horizontal = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoneScore" type="Label" parent="CanvasLayer2"]
+z_index = 21
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 90.0
+offset_right = 87.5
+offset_bottom = 23.0
+grow_horizontal = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Demonic Stone4" parent="." instance=ExtResource("2_6iuxv")]
+position = Vector2(-2289, -70)
+
+[connection signal="pressed" from="CanvasLayer2/RestartHereButton" to="." method="_on_restart_here_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/RestartHomeButton" to="." method="_on_restart_home_button_pressed"]

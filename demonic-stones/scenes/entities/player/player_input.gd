@@ -25,17 +25,14 @@ func _ready() -> void:
 
 #  Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# Getting the input direction from Player
-	input_direction = Input.get_vector(player_actions.move_left, player_actions.move_right,
-			 player_actions.move_up, player_actions.move_down)
-	
-	# Check if Player wants to attacki and set bool accordingly
-	if(Input.is_action_just_pressed(player_actions.attack)):
-		# Debug
-		prints("ATTACKING")
-		attacking = true
-	# Check if Player stopped attacking and set bool accordingly
-	if(Input.is_action_just_released(player_actions.attack)):
-		attacking = false
-		# Debug
-		prints("STOPPED ATTACKING")
+	if !blackboard.get_var(BBNames.actions_locked_var):
+		# Getting the input direction from Player
+		input_direction = Input.get_vector(player_actions.move_left, player_actions.move_right,
+				 player_actions.move_up, player_actions.move_down)
+		
+		# Check if Player wants to attacki and set bool accordingly
+		if(Input.is_action_just_pressed(player_actions.attack)):
+			attacking = true
+		# Check if Player stopped attacking and set bool accordingly
+		if(Input.is_action_just_released(player_actions.attack)):
+			attacking = false

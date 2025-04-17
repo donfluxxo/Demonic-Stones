@@ -1,32 +1,38 @@
 extends Mob
 
-@export var player_in_sight : bool
-@export var player_detected : bool
-@export var attacking : bool
 
+@export var attacking : bool
+@export var max_health : float
+
+@onready var health : float
 @onready var just_spawned : bool
 @onready var hit_area : Area2D = $HitArea
 @onready var spawn_point : Vector2 = self.position
-@onready var raycast : RayCast2D = $RayCast2D
+@onready var healthbar : ProgressBar = $HealthBar
+
+signal death
+
+var is_dead : bool = false
 var mob : Mob
 
 func _ready() -> void:
 	mob = self
 	just_spawned = true
 	attacking = false
+	health = max_health
+	healthbar.max_value = max_health
+	healthbar.value = health
 
 
 func _physics_process(delta: float) -> void:
 	handle_animation()
 	move_and_slide()
-	look_for_player()
-	prints(player_in_sight)
 
 
 # Move function
 func move(direction : Vector2) -> void:
 	# Check if there was input
-	if direction:
+	if direction and not is_dead:
 		# Call the velocity update function with input direction
 		update_velocity(direction)
 		# Call the move function of the mob
@@ -46,16 +52,14 @@ func update_velocity(input: Vector2) -> void:
 			sprite.flip_h = false
 			hit_area.scale.x = 1.0
 			sprite.position.x = 0
-			raycast.scale.x = 1.0
 	if velocity.x > 0:
 			sprite.flip_h = true
 			hit_area.scale.x = -1.0
 			sprite.position.x = 72
-			raycast.scale.x = -1.0
 
 
 func handle_animation() -> void:
-	if not just_spawned and not attacking:
+	if not just_spawned and not attacking and not is_dead:
 		if Vector2.ZERO.is_equal_approx(velocity):
 			animation_player.play("Idle")
 		if not Vector2.ZERO.is_equal_approx(velocity):
@@ -69,21 +73,18 @@ func check_for_self(node : Node2D) -> bool:
 		return false
 
 
-func look_for_player() -> void:
-	if raycast.is_colliding():
-		var collider : Node2D = raycast.get_collider()
-		if collider.is_in_group("player"):
-			player_in_sight = true
-		else:
-			player_in_sight = false
-	else:
-		player_in_sight = false
-#
-#func _on_timer_timeout() -> void:
-	#move(Vector2(randf_range(-1,1),randf_range(-1,1)))
-	#$Timer2.start()
-#
-#
-#func _on_timer_2_timeout() -> void:
-	#velocity = Vector2.ZERO
-	#$Timer.start()
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("weapons"):
+		_manage_hit(area)
+
+
+func _manage_hit(object : Node2D) -> void:
+	health -= object.get_damage()
+	healthbar.value = health
+	if health <= 0:
+		health = 0
+		is_dead = true
+		animation_player.play("Death")
+		await get_tree().create_timer(1.2).timeout
+		death.emit()
+		self.queue_free()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=66 format=3 uid="uid://cpoly2sev0fju"]
+[gd_scene load_steps=67 format=3 uid="uid://cpoly2sev0fju"]
 
 [ext_resource type="Script" uid="uid://bvatv3oveuap6" path="res://scenes/entities/mobs/demon.gd" id="1_o0ubf"]
 [ext_resource type="Texture2D" uid="uid://gt1pngu6qe7h" path="res://assets/characters/Skeleton/Sprite Sheets/Bringer-of-Death-SpritSheet.png" id="2_k8to0"]
+[ext_resource type="Script" uid="uid://dfyhpcdq658n8" path="res://scenes/entities/mobs/mob_hit_area.gd" id="3_h8ik6"]
 [ext_resource type="BehaviorTree" uid="uid://dp2ejborsw0j7" path="res://ai/trees/demon.tres" id="3_k8to0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yjvi1"]
@@ -693,7 +694,7 @@ z_index = 2
 y_sort_enabled = true
 collision_layer = 8
 script = ExtResource("1_o0ubf")
-health = 90.0
+max_health = 90.0
 attack_damage = 2.0
 move_speed = 50.0
 animation_player = NodePath("AnimationPlayer")
@@ -726,8 +727,9 @@ libraries = {
 }
 
 [node name="HitArea" type="Area2D" parent="." groups=["mob_attack"]]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 2
+script = ExtResource("3_h8ik6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(-34, -18)
@@ -736,11 +738,11 @@ scale = Vector2(2.43, 2.635)
 shape = SubResource("CapsuleShape2D_tw56l")
 disabled = true
 
-[node name="HurtArea" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -18)
 scale = Vector2(1.312, 1.5)
 shape = SubResource("CapsuleShape2D_h8ik6")
@@ -749,17 +751,12 @@ shape = SubResource("CapsuleShape2D_h8ik6")
 behavior_tree = ExtResource("3_k8to0")
 blackboard_plan = SubResource("BlackboardPlan_3e7pt")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+offset_left = -15.0
+offset_top = -69.0
+offset_right = 15.0
+offset_bottom = -65.0
+show_percentage = false
 
-[node name="Timer2" type="Timer" parent="."]
-one_shot = true
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -19)
-target_position = Vector2(-70, 0)
-collision_mask = 2
-hit_from_inside = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

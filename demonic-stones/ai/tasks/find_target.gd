@@ -27,4 +27,8 @@ func get_enemy_node() -> Node2D:
 
 func get_player_node() -> Node2D:
 	var nodes : Array[Node] = agent.get_tree().get_nodes_in_group(group)
-	return nodes[0]
+	if nodes.front() != null:
+		return nodes[0]
+	else:
+		var alternative : Array[Node] = agent.get_tree().get_nodes_in_group("mobs")
+		return alternative[0]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyngn62q5561i"]
+[gd_scene load_steps=9 format=3 uid="uid://dyngn62q5561i"]
 
 [ext_resource type="PackedScene" uid="uid://cfkgaxft3r4b2" path="res://scenes/entities/player/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://t1hlwrmyrc76" path="res://scenes/game.gd" id="1_u5sy4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5y3mktx4vp21" path="res://scenes/objects/chest.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/demonic_stone.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://diy6mniu6wiby" path="res://scenes/entities/player/restart_screen.tscn" id="6_u5sy4"]
 
 [sub_resource type="Curve2D" id="Curve2D_p57ef"]
 _data = {
@@ -13,10 +14,13 @@ _data = {
 }
 point_count = 9
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player")]
 y_sort_enabled = true
 script = ExtResource("1_u5sy4")
 mob_scene = ExtResource("2_gee14")
+player_scene = ExtResource("1_lbhrr")
+restart_scene = ExtResource("6_u5sy4")
+player = NodePath("Player")
 
 [node name="World" parent="." instance=ExtResource("4_u5sy4")]
 metadata/_edit_lock_ = true
@@ -26,11 +30,23 @@ position = Vector2(-96, 54)
 
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 
+[node name="RestartScreen" parent="Player" instance=ExtResource("6_u5sy4")]
+z_index = 20
+
 [node name="Demonic Stone" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(400, -135)
 
 [node name="Demonic Stone2" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(201, 67)
+position = Vector2(1136, 1112)
+
+[node name="Demonic Stone3" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-1231, 1944)
+
+[node name="Demonic Stone4" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-2287, -70)
+
+[node name="Demonic Stone5" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-2063, -232)
 
 [node name="MobArea" type="Path2D" parent="."]
 curve = SubResource("Curve2D_p57ef")
@@ -39,5 +55,16 @@ curve = SubResource("Curve2D_p57ef")
 position = Vector2(-141, -1)
 rotation = -1.14938
 
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="restart_here" from="Player/RestartScreen" to="." method="_on_restart_screen_restart_here"]
+[connection signal="restart_home" from="Player/RestartScreen" to="." method="_on_restart_screen_restart_home"]
 [connection signal="spawn_mob_wave" from="Demonic Stone" to="." method="_on_spawn_mob_wave"]
+[connection signal="stone_destroyed" from="Demonic Stone" to="." method="_on_stone_destroyed"]
 [connection signal="spawn_mob_wave" from="Demonic Stone2" to="." method="_on_spawn_mob_wave"]
+[connection signal="stone_destroyed" from="Demonic Stone2" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_wave" from="Demonic Stone3" to="." method="_on_spawn_mob_wave"]
+[connection signal="stone_destroyed" from="Demonic Stone3" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_wave" from="Demonic Stone4" to="." method="_on_spawn_mob_wave"]
+[connection signal="stone_destroyed" from="Demonic Stone4" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_wave" from="Demonic Stone5" to="." method="_on_spawn_mob_wave"]
+[connection signal="stone_destroyed" from="Demonic Stone5" to="." method="_on_stone_destroyed"]

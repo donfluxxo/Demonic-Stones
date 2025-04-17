@@ -133,11 +133,15 @@ collision_mask = 2
 scale = Vector2(1.645, 1.22)
 shape = SubResource("CircleShape2D_g1fdf")
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -84.0
-offset_right = 20.0
-offset_bottom = -61.0
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0.733333, 0, 1)
+offset_left = -25.0
+offset_top = -69.0
+offset_right = 25.0
+offset_bottom = -65.0
+max_value = 500.0
+step = 0.001
+show_percentage = false
 
 [node name="GlowTimer" type="Timer" parent="."]
 

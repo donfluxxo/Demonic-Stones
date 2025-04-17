@@ -3,16 +3,53 @@ extends Character
 
 
 @export var player_actions : PlayerActions
+@export var max_health: float = 100
+@export var limbo_hsm : LimboHSM
 
+
+@onready var hud : Control = $HUD
+@onready var attack_timer : Timer = $LimboHSM/AttackState/AttackTimer
+@onready var attack_cooldown : float = attack_timer.get_wait_time()
+@onready var health : float = max_health
+@onready var kill_label : Label = $HUD/MobKillLabel
+
+var blackboard : Blackboard
 var character : Character = self
+var mobs_killed : int
+var is_dead : bool = false
+var actions_locked : bool = false
+signal player_died
+
+
+func _ready() -> void:
+	hud.max_health = max_health
+	hud.attack_cooldown = attack_cooldown
+	blackboard = limbo_hsm.blackboard
+	blackboard.bind_var_to_property(BBNames.actions_locked_var, self, "actions_locked",true)
+
+
+func _process(delta: float) -> void:
+	update_hud()
+
 
 func _on_player_hurt_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("mob_attack"):
 		_manage_hit(area)
 
+
 func _manage_hit(object : Node2D) -> void:
-	character.health -= object.get_damage()
+	health -= object.get_damage()
 	#healthlabel.text = "%f" %health
 	#shake()
-	if character.health <= 0:
-		character.health = 0
+	if health <= 0 and !is_dead:
+		health = 0
+		is_dead = true
+		actions_locked = true
+		player_died.emit(global_position, mobs_killed)
+
+
+func update_hud() -> void:
+	hud.health = health
+	var time_left : float = attack_timer.get_time_left()
+	hud.attack_cooldown_left = time_left
+	kill_label.text = "Mobs killed: %s" %mobs_killed

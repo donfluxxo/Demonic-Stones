@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://cfkgaxft3r4b2"]
+[gd_scene load_steps=135 format=3 uid="uid://cfkgaxft3r4b2"]
 
 [ext_resource type="Script" uid="uid://c58u3hwud7eqi" path="res://scenes/entities/player/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://brt48p83lygb5" path="res://assets/characters/NightBorne/NightBorne.png" id="1_ucweq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://jochaiw1cwmv" path="res://scenes/entities/player/player_actions.gd" id="8_1murt"]
 [ext_resource type="Script" uid="uid://d1732xl2lvrpw" path="res://scenes/entities/player/attack_state.gd" id="8_ovg4i"]
 [ext_resource type="Animation" uid="uid://c8dbylntg2w0r" path="res://Attack.res" id="11_7wli1"]
+[ext_resource type="Script" uid="uid://dxx3vt1brgwib" path="res://scenes/entities/player/player_hud.gd" id="13_xy2vv"]
 
 [sub_resource type="Resource" id="Resource_7wli1"]
 script = ExtResource("8_1murt")
@@ -26,8 +27,7 @@ metadata/_custom_type_script = "uid://jochaiw1cwmv"
 
 [sub_resource type="Resource" id="Resource_ovg4i"]
 script = ExtResource("2_5sj0x")
-move_speed = 150.0
-max_health = 100.0
+move_speed = 180.0
 metadata/_custom_type_script = "uid://nyhky8fld4jd"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42nxq"]
@@ -963,7 +963,7 @@ _data = {
 &"RESET": SubResource("Animation_xy2vv")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("limbo_hsm", "animation_player", "sprite") groups=["player"]]
 z_index = 2
 y_sort_enabled = true
 scale = Vector2(1.5, 1.5)
@@ -971,6 +971,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_08t41")
 player_actions = SubResource("Resource_7wli1")
+limbo_hsm = NodePath("LimboHSM")
 stats = SubResource("Resource_ovg4i")
 animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("PlayerAnimation")
@@ -994,7 +995,7 @@ position = Vector2(0, -11)
 scale = Vector2(1, 0.8)
 shape = SubResource("CapsuleShape2D_j0oqr")
 
-[node name="Sword" type="Area2D" parent="." groups=["player", "weapons"]]
+[node name="Sword" type="Area2D" parent="." groups=["weapons"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 12
@@ -1045,8 +1046,10 @@ sword = NodePath("../../Sword")
 metadata/_custom_type_script = "uid://dcuocv8giyanq"
 
 [node name="AttackTimer" type="Timer" parent="LimboHSM/AttackState"]
-wait_time = 0.7
+wait_time = 0.8
 one_shot = true
+
+[node name="HurtState" type="LimboState" parent="LimboHSM"]
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("limbo_hsm")]
 visible = false
@@ -1063,12 +1066,52 @@ player_actions = SubResource("Resource_5sj0x")
 limbo_hsm = NodePath("../LimboHSM")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_r4dfn")
 }
+
+[node name="HUD" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("13_xy2vv")
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="HUD"]
+modulate = Color(0.937255, 0, 0.0862745, 1)
+layout_mode = 0
+offset_left = -202.0
+offset_top = 113.334
+offset_right = -123.999
+offset_bottom = 123.334
+rotation = -1.5708
+step = 0.001
+value = 100.0
+show_percentage = false
+
+[node name="AttackCooldownBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = -189.999
+offset_top = 113.334
+offset_right = -111.999
+offset_bottom = 117.334
+rotation = -1.5708
+max_value = 0.8
+step = 0.001
+show_percentage = false
+
+[node name="MobKillLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = -201.333
+offset_top = -115.333
+offset_right = -156.333
+offset_bottom = -92.3333
+theme_override_font_sizes/font_size = 6
 
 [connection signal="area_entered" from="PlayerHurtBox" to="." method="_on_player_hurt_box_area_entered"]
 [connection signal="body_entered" from="Sword" to="LimboHSM/AttackState" method="_on_sword_body_entered"]
