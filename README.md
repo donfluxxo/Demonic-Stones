@@ -30,6 +30,7 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 
 - [Godot Engine 4.4+](https://godotengine.org/)
 - GDScript
+- [LimboAI Plugin](https://godotengine.org/asset-library/asset/3787)
 - A* Navigation, Behavior Trees, Signal-based systems, etc.
 
 
@@ -46,7 +47,7 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 ## 🧭 (Possible) Planned Features
 
 - Multiple playable characters with unique stats
-- Swappable weapons (e.g., swords, longswords, axes, bows, maces, etc)
+- Swappable weapons (e.g., swords, longswords, axes, bows, spears maces, etc)
 - Enemy variety with different difficulty levels
 - Tiered stones (color-coded) that spawn different enemies
 - Buff items and consumables
