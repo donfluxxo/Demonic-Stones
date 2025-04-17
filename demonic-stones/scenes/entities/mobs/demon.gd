@@ -46,13 +46,16 @@ func update_velocity(input: Vector2) -> void:
 	
 	# Update velocity in the character stats based on user input
 	velocity = input.normalized() * move_speed
-	
+	update_facing(velocity.x)
+
+
+func update_facing(direction : float) -> void:
 	# Flip the demons elements to the way the demon is facing
-	if velocity.x < 0:
+	if direction < 0:
 			sprite.flip_h = false
 			hit_area.scale.x = 1.0
 			sprite.position.x = 0
-	if velocity.x > 0:
+	if direction > 0:
 			sprite.flip_h = true
 			hit_area.scale.x = -1.0
 			sprite.position.x = 72

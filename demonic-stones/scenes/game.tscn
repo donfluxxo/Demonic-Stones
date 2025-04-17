@@ -26,7 +26,13 @@ player = NodePath("Player")
 metadata/_edit_lock_ = true
 
 [node name="Chest" parent="World" instance=ExtResource("3_lnu2h")]
-position = Vector2(-96, 54)
+position = Vector2(-317, -608)
+
+[node name="Chest2" parent="World" instance=ExtResource("3_lnu2h")]
+position = Vector2(-510, -605)
+
+[node name="Chest3" parent="World" instance=ExtResource("3_lnu2h")]
+position = Vector2(-415, -617)
 
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 

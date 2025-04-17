@@ -1,10 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=48 format=3 uid="uid://dp2ejborsw0j7"]
+[gd_resource type="BehaviorTree" load_steps=50 format=3 uid="uid://dp2ejborsw0j7"]
 
 [ext_resource type="Script" uid="uid://dh0oi5jscrj0" path="res://ai/tasks/choose_random_position.gd" id="1_2biup"]
 [ext_resource type="Script" uid="uid://c36rf4d4a3wif" path="res://ai/tasks/in_range.gd" id="1_23fir"]
 [ext_resource type="Script" uid="uid://dtuox0w3akc5n" path="res://ai/tasks/find_target.gd" id="1_abjmx"]
 [ext_resource type="Script" uid="uid://caxpk4m8x7tqh" path="res://ai/tasks/move_to_target.gd" id="2_6jxv7"]
 [ext_resource type="Script" uid="uid://83g67gqltrh2" path="res://ai/tasks/move_to_position.gd" id="2_abjmx"]
+[ext_resource type="Script" uid="uid://bvs1h50ecgkoj" path="res://ai/tasks/face_target.gd" id="2_h6nl5"]
 [ext_resource type="Script" uid="uid://caimi2nbda12e" path="res://ai/tasks/not_in_range_of_spawn_position.gd" id="6_h1tfa"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_r6cmu"]
@@ -64,6 +65,10 @@ resource_name = "true"
 variable = &"target_alive"
 value = SubResource("BBVariant_h1tfa")
 
+[sub_resource type="BTAction" id="BTAction_fk7ht"]
+script = ExtResource("2_h6nl5")
+target_var = &"target"
+
 [sub_resource type="BTRandomWait" id="BTRandomWait_0t2pu"]
 min_duration = 0.5
 max_duration = 1.0
@@ -107,7 +112,7 @@ max_duration = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_fk7ht"]
 custom_name = "Attack Player Sequence"
-children = [SubResource("BTCondition_23fir"), SubResource("BTCheckVar_h6nl5"), SubResource("BTRandomWait_0t2pu"), SubResource("BTSetAgentProperty_23fir"), SubResource("BTPlayAnimation_23fir"), SubResource("BTAwaitAnimation_h6nl5"), SubResource("BTSetAgentProperty_h1tfa"), SubResource("BTRandomWait_hwb1a")]
+children = [SubResource("BTCondition_23fir"), SubResource("BTCheckVar_h6nl5"), SubResource("BTAction_fk7ht"), SubResource("BTRandomWait_0t2pu"), SubResource("BTSetAgentProperty_23fir"), SubResource("BTPlayAnimation_23fir"), SubResource("BTAwaitAnimation_h6nl5"), SubResource("BTSetAgentProperty_h1tfa"), SubResource("BTRandomWait_hwb1a")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_h1tfa"]
 duration = 3.0
