@@ -7,6 +7,7 @@ extends Node
 
 
 var blackboard : Blackboard
+
 var input_direction : Vector2
 var attacking : bool
 
@@ -15,10 +16,8 @@ var attacking : bool
 func _ready() -> void:
 	# Initiate blackboard
 	blackboard = limbo_hsm.blackboard
-	
 	# Bind the input direction to the corresponding blackboard var
 	blackboard.bind_var_to_property(BBNames.direction_var, self ,"input_direction", true)
-	
 	# Bing the attack input to the corresponding blackboard var
 	blackboard.bind_var_to_property(BBNames.attack_var, self, "attacking",true)
 

@@ -1,5 +1,8 @@
 extends Control
 
+signal restarted_here
+signal restarted_home
+
 
 @onready var retry_screen : ColorRect = $CanvasLayer2/RetryScreen
 @onready var death_message1 : Label = $CanvasLayer2/DeathMessage
@@ -7,19 +10,6 @@ extends Control
 @onready var death_message3 : Label = $CanvasLayer2/StoneScore
 @onready var canvas_layer : CanvasLayer = $CanvasLayer
 @onready var canvas_layer2 : CanvasLayer = $CanvasLayer2
-
-signal restart_here
-signal restart_home
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	hide_restart_screen()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func show_restart_screen(mobs : int, stones : int) -> void:
@@ -36,8 +26,8 @@ func hide_restart_screen() -> void:
 
 
 func _on_restart_here_button_pressed() -> void:
-	restart_here.emit()
+	restarted_here.emit()
 
 
 func _on_restart_home_button_pressed() -> void:
-	restart_home.emit()
+	restarted_home.emit()

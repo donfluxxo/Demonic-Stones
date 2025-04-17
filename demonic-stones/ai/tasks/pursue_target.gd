@@ -1,3 +1,4 @@
+@tool
 extends BTAction
 
 
@@ -5,7 +6,13 @@ extends BTAction
 
 @export var tolerance : int = 30
 
+
 var _waypoint: Vector2
+
+
+# Display a customized name (requires @tool).
+func _generate_name() -> String:
+	return "PursueTarget" + LimboUtility.decorate_var(target_var)
 
 
 func _enter() -> void:
@@ -18,18 +25,23 @@ func _enter() -> void:
 
 # Called each time this task is ticked (aka executed).
 func _tick(_delta: float) -> Status:
-	var target: Node2D = blackboard.get_var(target_var, null)
+	
+	var raw_target = blackboard.get_var(target_var, null)
+	if not is_instance_valid(raw_target):
+		return FAILURE
+	
+	var target: Node2D = raw_target
 	if not is_instance_valid(target):
 		return FAILURE
-
+	
 	var desired_pos: Vector2 = _get_desired_position(target)
 	if agent.global_position.distance_to(desired_pos) < tolerance:
 		agent.move(Vector2.ZERO)
 		return SUCCESS
-
+	
 	if agent.global_position.distance_to(_waypoint) < tolerance:
 		_select_new_waypoint(desired_pos)
-
+	
 	var desired_velocity: Vector2 = agent.global_position.direction_to(_waypoint) * agent.move_speed
 	agent.move(desired_velocity)
 	return RUNNING

@@ -1,12 +1,13 @@
-[gd_resource type="BehaviorTree" load_steps=50 format=3 uid="uid://dp2ejborsw0j7"]
+[gd_resource type="BehaviorTree" load_steps=51 format=3 uid="uid://dp2ejborsw0j7"]
 
 [ext_resource type="Script" uid="uid://dh0oi5jscrj0" path="res://ai/tasks/choose_random_position.gd" id="1_2biup"]
 [ext_resource type="Script" uid="uid://c36rf4d4a3wif" path="res://ai/tasks/in_range.gd" id="1_23fir"]
 [ext_resource type="Script" uid="uid://dtuox0w3akc5n" path="res://ai/tasks/find_target.gd" id="1_abjmx"]
-[ext_resource type="Script" uid="uid://caxpk4m8x7tqh" path="res://ai/tasks/move_to_target.gd" id="2_6jxv7"]
 [ext_resource type="Script" uid="uid://83g67gqltrh2" path="res://ai/tasks/move_to_position.gd" id="2_abjmx"]
 [ext_resource type="Script" uid="uid://bvs1h50ecgkoj" path="res://ai/tasks/face_target.gd" id="2_h6nl5"]
+[ext_resource type="Script" uid="uid://caxpk4m8x7tqh" path="res://ai/tasks/pursue_target.gd" id="4_h6nl5"]
 [ext_resource type="Script" uid="uid://caimi2nbda12e" path="res://ai/tasks/not_in_range_of_spawn_position.gd" id="6_h1tfa"]
+[ext_resource type="Script" uid="uid://ck3cd2ksm7uol" path="res://ai/tasks/move_to_spawnposition.gd" id="8_hwb1a"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_r6cmu"]
 var/target/name = &"target"
@@ -39,11 +40,11 @@ children = [SubResource("BTAwaitAnimation_6jxv7")]
 
 [sub_resource type="BBVariant" id="BBVariant_2biup"]
 type = 1
-saved_value = false
-resource_name = "<null>"
+saved_value = true
+resource_name = "true"
 
 [sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_abjmx"]
-property = &"just_spawned"
+property = &"action_allowed"
 value = SubResource("BBVariant_2biup")
 
 [sub_resource type="BTRunLimit" id="BTRunLimit_h1tfa"]
@@ -75,11 +76,11 @@ max_duration = 1.0
 
 [sub_resource type="BBVariant" id="BBVariant_6jxv7"]
 type = 1
-saved_value = true
-resource_name = "true"
+saved_value = false
+resource_name = "false"
 
 [sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_23fir"]
-property = &"attacking"
+property = &"action_allowed"
 value = SubResource("BBVariant_6jxv7")
 
 [sub_resource type="BBNode" id="BBNode_6jxv7"]
@@ -100,11 +101,11 @@ animation_name = &"Attack"
 
 [sub_resource type="BBVariant" id="BBVariant_23fir"]
 type = 1
-saved_value = false
-resource_name = "<null>"
+saved_value = true
+resource_name = "true"
 
 [sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_h1tfa"]
-property = &"attacking"
+property = &"action_allowed"
 value = SubResource("BBVariant_23fir")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_hwb1a"]
@@ -131,7 +132,7 @@ target_var = &"target"
 target_alive_var = &"target_alive"
 
 [sub_resource type="BTAction" id="BTAction_h6nl5"]
-script = ExtResource("2_6jxv7")
+script = ExtResource("4_h6nl5")
 target_var = &"target"
 tolerance = 30
 
@@ -180,15 +181,14 @@ script = ExtResource("6_h1tfa")
 roaming_distance_max = 1500.0
 spawn_pos = &"spawn"
 
-[sub_resource type="BTAction" id="BTAction_hwb1a"]
-script = ExtResource("2_abjmx")
-target_pos_var = &"pos"
+[sub_resource type="BTAction" id="BTAction_hw7ly"]
+script = ExtResource("8_hwb1a")
 dir_var = &"dir"
-tolerance = 20
+tolerance = 30
 
 [sub_resource type="BTSequence" id="BTSequence_hw7ly"]
 custom_name = "Return To Spawn Sequence"
-children = [SubResource("BTCondition_h6nl5"), SubResource("BTAction_hwb1a")]
+children = [SubResource("BTCondition_h6nl5"), SubResource("BTAction_hw7ly")]
 
 [sub_resource type="BTSelector" id="BTSelector_hwb1a"]
 children = [SubResource("BTRunLimit_6jxv7"), SubResource("BTRunLimit_23fir"), SubResource("BTRunLimit_h1tfa"), SubResource("BTCooldown_h1tfa"), SubResource("BTSequence_hwb1a"), SubResource("BTProbability_h1tfa"), SubResource("BTSequence_hw7ly")]

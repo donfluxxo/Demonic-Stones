@@ -1,8 +1,10 @@
+@tool 
 extends BTCondition
-## InRange condition checks if the agent is within a range of target,
-## defined by [member distance_min] and [member distance_max]. [br]
+## InRangeOfSpawnposition condition checks if the agent is within a range of its 
+## spawn point, defined by [member roaming_distance_max]. [br]
 ## Returns [code]SUCCESS[/code] if the agent is within the given range;
 ## otherwise, returns [code]FAILURE[/code].
+
 
 ## Maximum distance to target.
 @export var roaming_distance_max: float
@@ -10,19 +12,21 @@ extends BTCondition
 ## Blackboard variable that holds the target (expecting Node2D).
 @export var spawn_pos: StringName = &"spawn"
 
+
 var _max_roaming_distance_squared: float
 
 
-# Called to generate a display name for the task.
+# Display a customized name (requires @tool).
 func _generate_name() -> String:
-	return "InRange (%d) of %s" % [roaming_distance_max,
+	return "NotInRange (%d) of %s" % [roaming_distance_max,
 		LimboUtility.decorate_var(spawn_pos)]
 
 
 # Called to initialize the task.
 func _setup() -> void:
-	## Small performance optimization
 	blackboard.set_var(spawn_pos,agent.spawn_point)
+	
+	# Small performance optimization
 	_max_roaming_distance_squared = roaming_distance_max * roaming_distance_max
 
 
@@ -30,7 +34,8 @@ func _setup() -> void:
 func _tick(_delta: float) -> Status:
 	var spawn_pos: Vector2 = blackboard.get_var(spawn_pos, null)
 	
-	if abs(agent.global_position.x - agent.spawn_point.x) + abs(agent.global_position.y - agent.spawn_point.y) < roaming_distance_max:
+	if abs(agent.global_position.x - agent.spawn_point.x) + abs(agent.global_position.y -
+			agent.spawn_point.y) < roaming_distance_max:
 		return FAILURE
 	else:
 		return SUCCESS

@@ -8,6 +8,11 @@ extends BTAction
 @export var dir_var : StringName = &"dir"
 
 
+# Display a customized name (requires @tool).
+func _generate_name() -> String:
+	return "ChooseRandomPosition" + LimboUtility.decorate_var(position_var)
+
+
 func _tick(delta: float) -> Status:
 	var new_position : Vector2
 	var direction : Vector2 = random_direction()

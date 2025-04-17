@@ -1,6 +1,6 @@
 class_name CharacterState
 extends LimboState
-## Base class for the state machine states
+## Base class for the character state machine states
 
 
 @export var animation_name : String

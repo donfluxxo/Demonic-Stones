@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cldtkf2ya51vr"]
+[gd_scene load_steps=22 format=3 uid="uid://cldtkf2ya51vr"]
 
 [ext_resource type="Texture2D" uid="uid://bu12swtrmt5ol" path="res://assets/world/objects/TX Props.png" id="1_exsdh"]
 [ext_resource type="Script" uid="uid://qtngikw21geb" path="res://scenes/entities/demonic_stone.gd" id="1_it42s"]
@@ -91,6 +91,12 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="Curve2D" id="Curve2D_htv8g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -141, -1, 0, 0, 0, 0, -102, -88, 0, 0, 0, 0, 2, -127, 0, 0, 0, 0, 120, -77, 0, 0, 0, 0, 144, 3, 0, 0, 0, 0, 108, 94, 0, 0, 0, 0, 0, 132, 0, 0, 0, 0, -108, 92, 0, 0, 0, 0, -140, 2)
+}
+point_count = 9
+
 [node name="Demonic Stone" type="StaticBody2D"]
 z_index = 2
 y_sort_enabled = true
@@ -122,7 +128,8 @@ scale = Vector2(1.445, 1.445)
 sprite_frames = SubResource("SpriteFrames_da7w6")
 animation = &"aura"
 autoplay = "aura"
-frame_progress = 0.562812
+frame = 4
+frame_progress = 0.464188
 
 [node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(0, -8)
@@ -152,6 +159,13 @@ scale = Vector2(2, 1.5)
 sprite_frames = SubResource("SpriteFrames_i1aw2")
 frame = 7
 frame_progress = 1.0
+
+[node name="MobArea" type="Path2D" parent="."]
+curve = SubResource("Curve2D_htv8g")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobArea"]
+position = Vector2(-141, -1)
+rotation = -1.14938
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="GlowTimer" to="." method="_on_glow_timer_timeout"]
