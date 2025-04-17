@@ -60,5 +60,3 @@ func _manage_hit(object : Node2D) -> void:
 		is_dead = true
 		actions_locked = true
 		player_died.emit(global_position, mobs_killed)
-		
-		# test for github repo functionality
