@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://t1hlwrmyrc76" path="res://scenes/game.gd" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cpoly2sev0fju" path="res://scenes/entities/mobs/demon.tscn" id="2_gee14"]
 [ext_resource type="PackedScene" uid="uid://c5y3mktx4vp21" path="res://scenes/objects/chest.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/demonic_stone.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/stones/demonic_stone.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://diy6mniu6wiby" path="res://scenes/entities/player/restart_screen.tscn" id="6_u5sy4"]
 

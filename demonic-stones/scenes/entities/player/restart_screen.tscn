@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://diy6mniu6wiby"]
 
 [ext_resource type="Script" uid="uid://dk2lkk5kwhhv8" path="res://scenes/entities/player/restart_screen.gd" id="1_0mjaf"]
-[ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/demonic_stone.tscn" id="2_6iuxv"]
+[ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/stones/demonic_stone.tscn" id="2_6iuxv"]
 
 [node name="RestartScreen" type="Control"]
 layout_mode = 3

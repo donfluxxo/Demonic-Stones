@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://cldtkf2ya51vr"]
 
 [ext_resource type="Texture2D" uid="uid://bu12swtrmt5ol" path="res://assets/world/objects/TX Props.png" id="1_exsdh"]
-[ext_resource type="Script" uid="uid://qtngikw21geb" path="res://scenes/entities/demonic_stone.gd" id="1_it42s"]
+[ext_resource type="Script" uid="uid://qtngikw21geb" path="res://scenes/entities/stones/demonic_stone.gd" id="1_it42s"]
 [ext_resource type="Texture2D" uid="uid://dtkx7ugfw3v6o" path="res://assets/world/objects/SpriteSheet.png" id="2_it42s"]
 [ext_resource type="Texture2D" uid="uid://b2iu6kbopulf3" path="res://assets/world/objects/Stone Defeated Crackle Animation/FX002_01.png" id="5_jxu5r"]
 [ext_resource type="Texture2D" uid="uid://bytot36btx82o" path="res://assets/world/objects/Stone Defeated Crackle Animation/FX002_02.png" id="6_u3328"]

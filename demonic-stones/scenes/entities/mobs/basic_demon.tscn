@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://b4c5xv62ux4qu"]
 
-[ext_resource type="Texture2D" uid="uid://gt1pngu6qe7h" path="res://assets/characters/Skeleton/Sprite Sheets/Bringer-of-Death-SpritSheet.png" id="1_vke34"]
+[ext_resource type="Texture2D" uid="uid://gt1pngu6qe7h" path="res://assets/characters/BringerOfDeath/Bringer-of-Death-SpritSheet.png" id="1_vke34"]
 [ext_resource type="Script" uid="uid://bvatv3oveuap6" path="res://scenes/entities/mobs/demon.gd" id="1_yjvi1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yjvi1"]

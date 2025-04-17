@@ -1,7 +1,7 @@
 [gd_scene load_steps=67 format=3 uid="uid://cpoly2sev0fju"]
 
 [ext_resource type="Script" uid="uid://bvatv3oveuap6" path="res://scenes/entities/mobs/demon.gd" id="1_o0ubf"]
-[ext_resource type="Texture2D" uid="uid://gt1pngu6qe7h" path="res://assets/characters/Skeleton/Sprite Sheets/Bringer-of-Death-SpritSheet.png" id="2_k8to0"]
+[ext_resource type="Texture2D" uid="uid://gt1pngu6qe7h" path="res://assets/characters/BringerOfDeath/Bringer-of-Death-SpritSheet.png" id="2_k8to0"]
 [ext_resource type="Script" uid="uid://dfyhpcdq658n8" path="res://scenes/entities/mobs/mob_hit_area.gd" id="3_h8ik6"]
 [ext_resource type="BehaviorTree" uid="uid://dp2ejborsw0j7" path="res://ai/trees/demon.tres" id="3_k8to0"]
 
