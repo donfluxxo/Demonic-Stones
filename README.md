@@ -24,7 +24,8 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 - Top-down 2D combat and movement
 - Procedural enemy spawning through demonic stone mechanics
 - Respawn system with "return to last death" or "return home" functionality
-- More to come (skills, loot, dungeon systems, etc.)
+- More to come (skills, loot, dungeon systems, etc.):
+- 
 
 ## 📦 Tech Stack
 
@@ -34,17 +35,42 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 
 ## 🚧 Current Status
 
-- Player movement & combat system: ✅  
-- Demonic stones and enemy spawns: ✅  
-- Respawn logic (including “death location” saving): ✅  
-- Early AI with Behavior Trees: ⏳  
-- UI and death screen logic: ⏳  
+- Basic player movement & combat system: ✅  
+- Demonic stones and enemy spawns: ✅
+- Health and death systems: ✅
+- Early AI with Behavior Trees: ✅  
+- UI and death screen logic: ✅
+- Respawn logic (including “death location” saving): ✅
 - Procedural content & real gameplay loop: ❌
+
+## 🧭 (Possible) Planned Features
+
+- Multiple playable characters with unique stats
+- Swappable weapons (e.g., swords, longswords, axes, bows, maces, etc)
+- Enemy variety with different difficulty levels
+- Tiered stones (color-coded) that spawn different enemies
+- Buff items and consumables
+- Inventory system (maybe)
+- Equipment and armor system
+- Stat or leveling system (possibly upgrade points)
+- Spell casting system
+- Summonable companion helpers (e.g. mini pets or spirits)
+- Possibly meta progression elements like unlocks or upgrades
+
+## 📷 Screenshots
+
+(Coming soon)
 
 ## 👤 Author
 
 Created by @donfluxxo
 
+This is an early-stage passion project. I'm open to feedback, suggestions, or even collaboration!  
+If you're interested in contributing or discussing ideas, feel free to reach out via GitHub Issues or Pull Requests.
+
 ## 📜 License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more info.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more info. 
+All third-party assets used in this project are either created by me or used under licenses that allow free and commercial use. If attribution is required, it is listed in the credits.
+
+
