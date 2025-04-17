@@ -1,4 +1,4 @@
-# ⚔️ Demonic Stones 🔥
+# ⚔️ Demonic Stones 🧙‍♂️
 
 ![Banner](./demonic-stones/banner.png)
 
