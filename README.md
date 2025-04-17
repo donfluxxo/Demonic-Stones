@@ -73,6 +73,7 @@ If you're interested in contributing or discussing ideas, feel free to reach out
 ## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more info. 
+
 All third-party assets used in this project are either created by me or used under licenses that allow free and commercial use. If attribution is required, it is listed in the credits.
 
 
