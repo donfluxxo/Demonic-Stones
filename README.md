@@ -1,4 +1,4 @@
-# Demonic Stones
+# ⚔️ Demonic Stones ☄️
 
 ![Banner](./demonic-stones/banner.png)
 
@@ -7,7 +7,7 @@
 **Demonic Stones** is a 2D top-down pixel art rogue-like, inspired by classic MMORPG vibes — especially as an homage to the legendary *Metin2*.  
 The game aims to capture that nostalgic feeling of battling through enemy hordes, breaking cursed stones, and uncovering secrets in a mystical world.
 
-> This is a passion project currently in its early development phase.
+> This is a passion project currently in its very early development phase.
 
 ## ⚔️ Vision
 
@@ -73,6 +73,7 @@ If you're interested in contributing or discussing ideas, feel free to reach out
 ## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more info. 
+
 All third-party assets used in this project are either created by me or used under licenses that allow free and commercial use. If attribution is required, it is listed in the credits.
 
 
