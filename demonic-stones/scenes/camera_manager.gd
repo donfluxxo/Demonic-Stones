@@ -6,13 +6,9 @@ extends Node
 @export var Camera_Zone0 : PhantomCamera2D
 @export var Camera_Zone1 : PhantomCamera2D
 @export var Camera_Zone2 : PhantomCamera2D
-
+@export var Camera_Zone3 : PhantomCamera2D
 
 var current_camera_zone : int = 0
-
-
-func ready() -> void:
-	pass
 
 
 func update_current_zone(body : Node2D, zone_a : int, zone_b : int) -> void:
@@ -40,16 +36,20 @@ func update_camera() -> void:
 			Camera_Zone2.priority = 1
 
 
-func _on_zone_01_body_entered(body : Node2D) -> void:
+func _on_camera_zone_01_body_entered(body : Node2D) -> void:
 	update_current_zone(body, 0, 1)
 
-func _on_zone_01_body_exited(body: Node2D) -> void:
+func _on_camera_zone_01_body_exited(body: Node2D) -> void:
 	update_current_zone(body, 0, 1)
 
 
-func _on_zone_02_body_entered(body : Node2D) -> void:
+func _on_camera_zone_02_body_entered(body : Node2D) -> void:
 	update_current_zone(body, 0, 2)
 
-func _on_zone_20_body_entered(body: Node2D) -> void:
+func _on_camera_zone_20_body_entered(body: Node2D) -> void:
 	current_camera_zone = 0
 	update_camera()
+
+
+func _on_camera_zone_03_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

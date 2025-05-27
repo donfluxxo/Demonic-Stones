@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg18hc3qxl70w"]
+
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_ie8ec"]
+[ext_resource type="Script" uid="uid://cj5ptb54j0wx2" path="res://scenes/camera_zone.gd" id="1_okmj2"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_okmj2"]
+
+[sub_resource type="Resource" id="Resource_okmj2"]
+script = ExtResource("2_okmj2")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="camera_zone" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_okmj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(400, -135)
+scale = Vector2(30, 30)
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("1_ie8ec")
+tween_resource = SubResource("Resource_okmj2")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
