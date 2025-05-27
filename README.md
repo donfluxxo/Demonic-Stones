@@ -31,6 +31,7 @@ The goal is to create a gameplay loop reminiscent of old-school MMORPG grinding,
 - [Godot Engine 4.4+](https://godotengine.org/)
 - GDScript
 - [LimboAI Plugin](https://godotengine.org/asset-library/asset/3787)
+- [PhantomCamera Plugin](https://phantom-camera.dev/)
 - A* Navigation, Behavior Trees, Signal-based systems, etc.
 
 
