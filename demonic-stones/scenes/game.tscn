@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyngn62q5561i"]
+[gd_scene load_steps=18 format=3 uid="uid://dyngn62q5561i"]
 
 [ext_resource type="PackedScene" uid="uid://cfkgaxft3r4b2" path="res://scenes/entities/player/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://t1hlwrmyrc76" path="res://scenes/game.gd" id="1_u5sy4"]
@@ -7,12 +7,40 @@
 [ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/stones/demonic_stone.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://diy6mniu6wiby" path="res://scenes/entities/player/restart_screen.tscn" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://c0tngrj4msupn" path="res://scenes/camera_manager.gd" id="8_gee14"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_vtaks"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_kvpfn"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="11_kvpfn"]
 
 [sub_resource type="Curve2D" id="Curve2D_p57ef"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -141, -1, 0, 0, 0, 0, -102, -88, 0, 0, 0, 0, 2, -127, 0, 0, 0, 0, 120, -77, 0, 0, 0, 0, 144, 3, 0, 0, 0, 0, 108, 94, 0, 0, 0, 0, 0, 132, 0, 0, 0, 0, -108, 92, 0, 0, 0, 0, -140, 2)
 }
 point_count = 9
+
+[sub_resource type="Resource" id="Resource_kvpfn"]
+script = ExtResource("10_kvpfn")
+duration = 1.0
+transition = 1
+ease = 2
+metadata/_custom_type_script = "uid://8umksf8e80fw"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvpfn"]
+
+[sub_resource type="Resource" id="Resource_vtaks"]
+script = ExtResource("10_kvpfn")
+duration = 1.7
+transition = 10
+ease = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvuet"]
+size = Vector2(48, 1)
+
+[sub_resource type="Resource" id="Resource_dinhu"]
+script = ExtResource("10_kvpfn")
+duration = 0.75
+transition = 1
+ease = 1
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player")]
 y_sort_enabled = true
@@ -39,38 +67,118 @@ position = Vector2(-415, -617)
 [node name="RestartScreen" parent="Player" instance=ExtResource("6_u5sy4")]
 z_index = 20
 
-[node name="Demonic Stone" parent="." instance=ExtResource("4_lbhrr")]
+[node name="Stones" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Demonic Stone" parent="Stones" instance=ExtResource("4_lbhrr")]
 position = Vector2(400, -135)
 
-[node name="Demonic Stone2" parent="." instance=ExtResource("4_lbhrr")]
+[node name="Demonic Stone2" parent="Stones" instance=ExtResource("4_lbhrr")]
 position = Vector2(1136, 1112)
 
-[node name="Demonic Stone3" parent="." instance=ExtResource("4_lbhrr")]
+[node name="Demonic Stone3" parent="Stones" instance=ExtResource("4_lbhrr")]
 position = Vector2(-1231, 1944)
 
-[node name="Demonic Stone4" parent="." instance=ExtResource("4_lbhrr")]
+[node name="Demonic Stone4" parent="Stones" instance=ExtResource("4_lbhrr")]
 position = Vector2(-2287, -70)
 
-[node name="Demonic Stone5" parent="." instance=ExtResource("4_lbhrr")]
+[node name="Demonic Stone5" parent="Stones" instance=ExtResource("4_lbhrr")]
 position = Vector2(-2063, -232)
 
-[node name="MobArea" type="Path2D" parent="."]
+[node name="MobArea" type="Path2D" parent="Stones"]
 curve = SubResource("Curve2D_p57ef")
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobArea"]
+[node name="MobSpawnLocation" type="PathFollow2D" parent="Stones/MobArea"]
 position = Vector2(-141, -1)
 rotation = -1.14938
+
+[node name="CameraManager" type="Node" parent="."]
+
+[node name="CamManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "Camera_Zone0", "Camera_Zone1", "Camera_Zone2")]
+script = ExtResource("8_gee14")
+player = NodePath("../Player")
+Camera_Zone0 = NodePath("Camera2D/PhantomCameraHost/CameraNodes/PhantomCamera2D")
+Camera_Zone1 = NodePath("Camera2D/PhantomCameraHost/CameraNodes/zone0-1/PhantomCamera2D")
+Camera_Zone2 = NodePath("Camera2D/PhantomCameraHost/CameraNodes/zone0-2/PhantomCamera2D")
+
+[node name="Camera2D" type="Camera2D" parent="CamManager"]
+physics_interpolation_mode = 1
+zoom = Vector2(0.75, 0.75)
+
+[node name="PhantomCameraHost" type="Node" parent="CamManager/Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("11_kvpfn")
+
+[node name="CameraNodes" type="Node2D" parent="CamManager/Camera2D/PhantomCameraHost"]
+
+[node name="PhantomCamera2D" type="Node2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes" node_paths=PackedStringArray("follow_target")]
+top_level = true
+script = ExtResource("9_vtaks")
+follow_mode = 1
+follow_target = NodePath("../../../../../Player")
+zoom = Vector2(0.75, 0.75)
+tween_resource = SubResource("Resource_kvpfn")
+follow_damping = true
+follow_damping_value = Vector2(0.15, 0.15)
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="zone0-1" type="Area2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-1"]
+position = Vector2(400, -135)
+scale = Vector2(30, 30)
+shape = SubResource("CircleShape2D_kvpfn")
+
+[node name="PhantomCamera2D" type="Node2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-1" node_paths=PackedStringArray("follow_targets")]
+top_level = true
+position = Vector2(200, -67.5)
+script = ExtResource("9_vtaks")
+follow_mode = 3
+follow_targets = [NodePath("../../../../../../Player"), NodePath("../../../../../../Stones/Demonic Stone")]
+zoom = Vector2(0.5, 0.5)
+tween_resource = SubResource("Resource_vtaks")
+follow_damping = true
+follow_damping_value = Vector2(0.3, 0.3)
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="zone0-2" type="Area2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-2"]
+position = Vector2(-416, -366)
+shape = SubResource("RectangleShape2D_kvuet")
+
+[node name="PhantomCamera2D" type="Node2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-2"]
+position = Vector2(-400, -500)
+script = ExtResource("9_vtaks")
+zoom = Vector2(0.65, 0.65)
+tween_resource = SubResource("Resource_dinhu")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="zone2-0" type="Area2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone2-0"]
+position = Vector2(-416, -322)
+shape = SubResource("RectangleShape2D_kvuet")
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="restarted_here" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_here"]
 [connection signal="restarted_home" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_home"]
-[connection signal="spawn_mob_triggered" from="Demonic Stone" to="." method="_on_spawn_mob_triggered"]
-[connection signal="stone_destroyed" from="Demonic Stone" to="." method="_on_stone_destroyed"]
-[connection signal="spawn_mob_triggered" from="Demonic Stone2" to="." method="_on_spawn_mob_triggered"]
-[connection signal="stone_destroyed" from="Demonic Stone2" to="." method="_on_stone_destroyed"]
-[connection signal="spawn_mob_triggered" from="Demonic Stone3" to="." method="_on_spawn_mob_triggered"]
-[connection signal="stone_destroyed" from="Demonic Stone3" to="." method="_on_stone_destroyed"]
-[connection signal="spawn_mob_triggered" from="Demonic Stone4" to="." method="_on_spawn_mob_triggered"]
-[connection signal="stone_destroyed" from="Demonic Stone4" to="." method="_on_stone_destroyed"]
-[connection signal="spawn_mob_triggered" from="Demonic Stone5" to="." method="_on_spawn_mob_triggered"]
-[connection signal="stone_destroyed" from="Demonic Stone5" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_triggered" from="Stones/Demonic Stone" to="." method="_on_spawn_mob_triggered"]
+[connection signal="stone_destroyed" from="Stones/Demonic Stone" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_triggered" from="Stones/Demonic Stone2" to="." method="_on_spawn_mob_triggered"]
+[connection signal="stone_destroyed" from="Stones/Demonic Stone2" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_triggered" from="Stones/Demonic Stone3" to="." method="_on_spawn_mob_triggered"]
+[connection signal="stone_destroyed" from="Stones/Demonic Stone3" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_triggered" from="Stones/Demonic Stone4" to="." method="_on_spawn_mob_triggered"]
+[connection signal="stone_destroyed" from="Stones/Demonic Stone4" to="." method="_on_stone_destroyed"]
+[connection signal="spawn_mob_triggered" from="Stones/Demonic Stone5" to="." method="_on_spawn_mob_triggered"]
+[connection signal="stone_destroyed" from="Stones/Demonic Stone5" to="." method="_on_stone_destroyed"]
+[connection signal="body_entered" from="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-1" to="CamManager" method="_on_zone_01_body_entered"]
+[connection signal="body_exited" from="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-1" to="CamManager" method="_on_zone_01_body_exited"]
+[connection signal="body_entered" from="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone0-2" to="CamManager" method="_on_zone_02_body_entered"]
+[connection signal="body_entered" from="CamManager/Camera2D/PhantomCameraHost/CameraNodes/zone2-0" to="CamManager" method="_on_zone_20_body_entered"]

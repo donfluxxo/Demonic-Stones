@@ -13,12 +13,21 @@ config_version=5
 config/name="Demonic Stones"
 run/main_scene="uid://dyngn62q5561i"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.5
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 
