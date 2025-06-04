@@ -26,7 +26,7 @@ window/stretch/scale=2.5
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 
@@ -69,6 +69,14 @@ attack={
 2d_physics/layer_2="player"
 2d_physics/layer_3="props"
 2d_physics/layer_4="mobs"
+
+[phantom_camera]
+
+tips/show_jitter_tips=false
+
+[physics]
+
+common/physics_interpolation=true
 
 [rendering]
 

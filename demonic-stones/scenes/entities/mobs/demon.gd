@@ -15,7 +15,7 @@ var mob : Mob
 
 @onready var health : float
 @onready var hit_area : Area2D = $HitArea
-@onready var spawn_point : Vector2 = self.position
+@onready var spawn_point : Vector2 
 @onready var healthbar : ProgressBar = $HealthBar
 
 
@@ -25,6 +25,7 @@ func _ready() -> void:
 	health = max_health
 	healthbar.max_value = max_health
 	healthbar.value = health
+	spawn_point = self.global_position
 
 
 func _physics_process(delta: float) -> void:
@@ -106,3 +107,6 @@ func _manage_hit(object : Node2D) -> void:
 		# Send out death signal and destroy the mob node
 		death_accured.emit()
 		self.queue_free()
+	else:
+		# Play hit animation
+		animation_player.play("Hit")

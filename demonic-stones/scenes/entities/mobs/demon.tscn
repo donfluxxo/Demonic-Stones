@@ -725,6 +725,7 @@ debug_color = Color(0.77347, 0.419392, 0.385667, 0.42)
 libraries = {
 &"": SubResource("AnimationLibrary_etsc7")
 }
+speed_scale = 0.75
 
 [node name="HitArea" type="Area2D" parent="." groups=["mob_attack"]]
 collision_layer = 8
