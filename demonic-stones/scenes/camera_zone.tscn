@@ -23,3 +23,6 @@ scale = Vector2(30, 30)
 script = ExtResource("1_ie8ec")
 tween_resource = SubResource("Resource_okmj2")
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

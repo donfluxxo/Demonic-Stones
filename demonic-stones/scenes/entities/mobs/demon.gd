@@ -11,11 +11,11 @@ signal death_accured
 
 var is_dead : bool = false
 var mob : Mob
+var spawn_point : Vector2
 
 
 @onready var health : float
-@onready var hit_area : Area2D = $HitArea
-@onready var spawn_point : Vector2 
+@onready var hit_area : Area2D = $HitArea 
 @onready var healthbar : ProgressBar = $HealthBar
 
 
