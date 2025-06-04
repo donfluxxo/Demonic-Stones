@@ -3,7 +3,7 @@ extends BTAction
 
 
 @export var dir_var : StringName = &"dir"
-
+@export var spawn_point_var : StringName = &"spawn_point"
 @export var tolerance : int = 30
 
 
@@ -12,7 +12,7 @@ var _waypoint: Vector2
 
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
-	return "MoveToSpawnposition" + LimboUtility.decorate_var(agent.spawn_point)
+	return "MoveToSpawnposition" + LimboUtility.decorate_var(spawn_point_var)
 
 
 func _enter() -> void:

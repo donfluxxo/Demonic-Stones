@@ -189,6 +189,7 @@ spawn_pos = &"spawn"
 [sub_resource type="BTAction" id="BTAction_hw7ly"]
 script = ExtResource("8_hwb1a")
 dir_var = &"dir"
+spawn_point_var = &"spawn_point"
 tolerance = 30
 
 [sub_resource type="BTSequence" id="BTSequence_hw7ly"]
