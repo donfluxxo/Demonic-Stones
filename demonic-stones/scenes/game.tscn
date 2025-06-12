@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dyngn62q5561i"]
+[gd_scene load_steps=22 format=3 uid="uid://dyngn62q5561i"]
 
 [ext_resource type="PackedScene" uid="uid://cfkgaxft3r4b2" path="res://scenes/entities/player/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://t1hlwrmyrc76" path="res://scenes/game.gd" id="1_u5sy4"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cldtkf2ya51vr" path="res://scenes/entities/stones/demonic_stone.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://diy6mniu6wiby" path="res://scenes/entities/player/restart_screen.tscn" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://lyp1gxnvesuu" path="res://assets/pollen-demosprite.png" id="7_dinhu"]
+[ext_resource type="Texture2D" uid="uid://nfc44e80jx5m" path="res://assets/pollen-demospriteklein.png" id="8_trtic"]
+[ext_resource type="Texture2D" uid="uid://fsjoafn0446c" path="res://assets/pollen-demospritegross.png" id="9_ir15t"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_vtaks"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_kvpfn"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="11_kvpfn"]
@@ -44,6 +47,16 @@ transition = 1
 ease = 2
 metadata/_custom_type_script = "uid://8umksf8e80fw"
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvuet"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -500, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1000, 1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player")]
 y_sort_enabled = true
 script = ExtResource("1_u5sy4")
@@ -67,7 +80,6 @@ position = Vector2(-415, -617)
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 
 [node name="RestartScreen" parent="Player" instance=ExtResource("6_u5sy4")]
-z_index = 20
 
 [node name="Stones" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -109,6 +121,7 @@ follow_damping_value = Vector2(0.15, 0.15)
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="camera_zone1" parent="CameraManagement" instance=ExtResource("12_dinhu")]
+visible = false
 
 [node name="CollisionShape2D" parent="CameraManagement/camera_zone1" index="0"]
 scale = Vector2(33, 33)
@@ -123,6 +136,7 @@ zoom = Vector2(0.6, 0.6)
 tween_resource = SubResource("Resource_kvuet")
 
 [node name="camera_zone2" parent="CameraManagement" instance=ExtResource("12_dinhu")]
+visible = false
 
 [node name="CollisionShape2D" parent="CameraManagement/camera_zone2" index="0"]
 position = Vector2(-416, -515)
@@ -144,9 +158,49 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("11_kvpfn")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = 100
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="small" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = 100
+amount = 100
+texture = ExtResource("7_dinhu")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-900, -500, 1800, 1000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="middle" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer3"]
+z_index = 100
+amount = 80
+texture = ExtResource("8_trtic")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-900, -500, 1800, 1000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+
+[node name="big" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = 100
+amount = 40
+texture = ExtResource("9_ir15t")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-900, -500, 1800, 1000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
-[connection signal="restarted_here" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_here"]
-[connection signal="restarted_home" from="Player/RestartScreen" to="." method="_on_restart_screen_restarted_home"]
 [connection signal="spawn_mob_triggered" from="Stones/Demonic Stone" to="." method="_on_spawn_mob_triggered"]
 [connection signal="stone_destroyed" from="Stones/Demonic Stone" to="." method="_on_stone_destroyed"]
 [connection signal="spawn_mob_triggered" from="Stones/Demonic Stone2" to="." method="_on_spawn_mob_triggered"]
