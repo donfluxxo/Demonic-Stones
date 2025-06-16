@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dyngn62q5561i"]
+[gd_scene load_steps=21 format=3 uid="uid://dyngn62q5561i"]
 
 [ext_resource type="PackedScene" uid="uid://cfkgaxft3r4b2" path="res://scenes/entities/player/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://t1hlwrmyrc76" path="res://scenes/game.gd" id="1_u5sy4"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cwpo3fpcklwmb" path="res://scenes/levels/world1.tscn" id="4_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://diy6mniu6wiby" path="res://scenes/entities/player/restart_screen.tscn" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://lyp1gxnvesuu" path="res://assets/pollen-demosprite.png" id="7_dinhu"]
-[ext_resource type="Texture2D" uid="uid://nfc44e80jx5m" path="res://assets/pollen-demospriteklein.png" id="8_trtic"]
 [ext_resource type="Texture2D" uid="uid://fsjoafn0446c" path="res://assets/pollen-demospritegross.png" id="9_ir15t"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_vtaks"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_kvpfn"]
@@ -158,32 +157,17 @@ script = ExtResource("11_kvpfn")
 
 [node name="ParallaxSystem" type="Node2D" parent="."]
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxSystem"]
-visible = false
-z_index = 99
-scroll_scale = Vector2(1.2, 1.2)
-
-[node name="small" type="GPUParticles2D" parent="ParallaxSystem/Parallax2D"]
-z_index = 100
-amount = 100
-texture = ExtResource("8_trtic")
-lifetime = 800.0
-preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_kvuet")
-
 [node name="Parallax2D2" type="Parallax2D" parent="ParallaxSystem"]
 z_index = 100
 scroll_scale = Vector2(1.5, 1.5)
 
 [node name="middle" type="GPUParticles2D" parent="ParallaxSystem/Parallax2D2"]
 z_index = 100
-amount = 80
+amount = 60
 texture = ExtResource("7_dinhu")
 lifetime = 800.0
 preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_kvuet")
 
@@ -196,27 +180,11 @@ amount = 40
 texture = ExtResource("9_ir15t")
 lifetime = 800.0
 preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_kvuet")
 
 [node name="ParallaxSystem2" type="Node2D" parent="."]
-position = Vector2(-1000, 0)
-
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxSystem2"]
-visible = false
-z_index = 99
-scroll_scale = Vector2(1.2, 1.2)
-
-[node name="small" type="GPUParticles2D" parent="ParallaxSystem2/Parallax2D"]
-z_index = 100
-amount = 100
-texture = ExtResource("8_trtic")
-lifetime = 800.0
-preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_kvuet")
 
 [node name="Parallax2D2" type="Parallax2D" parent="ParallaxSystem2"]
 z_index = 100
@@ -224,11 +192,11 @@ scroll_scale = Vector2(1.5, 1.5)
 
 [node name="middle" type="GPUParticles2D" parent="ParallaxSystem2/Parallax2D2"]
 z_index = 100
-amount = 80
+amount = 60
 texture = ExtResource("7_dinhu")
 lifetime = 800.0
 preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_kvuet")
 
@@ -241,7 +209,65 @@ amount = 40
 texture = ExtResource("9_ir15t")
 lifetime = 800.0
 preprocess = 1000.0
-visibility_rect = Rect2(-500, -500, 1000, 1000)
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="ParallaxSystem3" type="Node2D" parent="."]
+
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxSystem3"]
+z_index = 100
+scroll_scale = Vector2(1.5, 1.5)
+
+[node name="middle" type="GPUParticles2D" parent="ParallaxSystem3/Parallax2D2"]
+z_index = 100
+amount = 60
+texture = ExtResource("7_dinhu")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="Parallax2D3" type="Parallax2D" parent="ParallaxSystem3"]
+scroll_scale = Vector2(2, 2)
+
+[node name="big" type="GPUParticles2D" parent="ParallaxSystem3/Parallax2D3"]
+z_index = 100
+amount = 40
+texture = ExtResource("9_ir15t")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="ParallaxSystem4" type="Node2D" parent="."]
+
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxSystem4"]
+z_index = 100
+scroll_scale = Vector2(1.5, 1.5)
+
+[node name="middle" type="GPUParticles2D" parent="ParallaxSystem4/Parallax2D2"]
+z_index = 100
+amount = 60
+texture = ExtResource("7_dinhu")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kvuet")
+
+[node name="Parallax2D3" type="Parallax2D" parent="ParallaxSystem4"]
+scroll_scale = Vector2(2, 2)
+
+[node name="big" type="GPUParticles2D" parent="ParallaxSystem4/Parallax2D3"]
+z_index = 100
+amount = 40
+texture = ExtResource("9_ir15t")
+lifetime = 800.0
+preprocess = 1000.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_kvuet")
 
